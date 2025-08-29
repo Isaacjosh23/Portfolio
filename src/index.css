@@ -1,70 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
 @import "tailwindcss";
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --color-solid: #42446e;
+  --color-grey: #666;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background: #fff;
+  color: var(--color-grey);
+  overflow-x: hidden;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.container {
+  max-width: 110rem;
+  padding: 0 3.2rem;
+  margin: 0 auto;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.nav-links:link,
+.nav-links:visited {
+  transition: all 0.3s;
+  padding: 1rem;
+  font-family: "DM Sans", sans-serif;
+  transition: all 0.5s;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.nav-links:hover,
+.nav-links:active {
+  text-decoration: underline;
+}
+
+.nav-open .main-nav {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.nav-open .icon-mobile-nav[name="close-outline"] {
+  display: block;
+  z-index: 9999;
+}
+
+.icon-mobile-nav[name="menu-outline"] {
+  display: block;
+}
+
+.nav-position {
+  top: 0;
+  transform: translate(-50%, 50%);
+  left: 40%;
+}
+
+.nav-position ul {
+  padding: 22% 20%;
+}
+
+.smooth-trans {
+  transition: all 0.3s;
+}
+
+.cta-btn {
+  padding: 1rem 1.5rem;
+  transition: all 0.3s;
+}
+
+.theme-btn {
+  box-shadow: 0 0 8px 2px rgba(102, 102, 102, 0.4);
+}
+
+.project-card {
+  box-shadow: 0 0 8px 2px rgba(102, 102, 102, 0.3);
+}
+
+.cus-shadow {
+  box-shadow: 0 0 8px 2px rgba(102, 102, 102, 0.3);
+}
+
+.hover-shadow {
+  transition: transform 0.3s ease; /* smooth animation */
+}
+
+.hover-shadow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px 2px rgba(102, 102, 102, 0.3);
+}
+
+.gradient {
+  background: linear-gradient(to right, #13b0f5, #ca24b4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* for Firefox */
+  color: transparent;
 }
