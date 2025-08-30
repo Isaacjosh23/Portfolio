@@ -94,6 +94,14 @@ body {
   box-shadow: 0 4px 8px 2px rgba(102, 102, 102, 0.3);
 }
 
+.img-gradient {
+  background: linear-gradient(to top, #13b0f5, #ca24b4);
+}
+
+.hero-img {
+  transform: translate(-50%, 50%);
+}
+
 .gradient {
   background: linear-gradient(to right, #13b0f5, #ca24b4);
   -webkit-background-clip: text;

@@ -6,69 +6,69 @@ const projectObject = [
   {
     id: 1,
 
-    image: "../../images/project-img/mortgage.jpg",
+    image: "../../images/project-img/portfolio.png",
 
-    Title: "Mortgage Repayment App",
+    Title: "Portfolio",
 
     Description:
-      "This is sample project description random things are here in description This is sample project lorem ipsum generator for dummy content",
+      "This appears to be a personal developer/branding page for Joshua—a portfolio or branding site to showcase who you are and why brands might need you.",
 
-    Stack: "HTML, JavaScript, SASS, React",
+    Stack: "React, TailwindCSS, CSS, Vite",
 
-    Weblink: "https://mortpay.netlify.app/",
+    Weblink: "https://portjosh.netlify.app/",
 
-    GitHubLink: "https://github.com/Isaacjosh23/Mortgage-Repayment.git",
+    GitHubLink: "https://github.com/Isaacjosh23/Portfolio.git",
   },
 
   {
     id: 2,
 
-    image: "../../images/project-img/mortgage.jpg",
+    image: "../../images/project-img/omnifood.png",
 
-    Title: "Mortgage Repayment App",
+    Title: "Omnifood",
 
     Description:
-      "This is sample project description random things are here in description This is sample project lorem ipsum generator for dummy content",
+      "A daily healthy meal subscription service powered by AI—personalized meal plans delivered to your door, tailored to your taste and diet preferences.",
 
-    Stack: "HTML, JavaScript, SASS, React",
+    Stack: "HTML, JavaScript, CSS, TailwindCSS",
 
-    Weblink: "https://mortpay.netlify.app/",
+    Weblink: "https://ominfood-nevercookagain.netlify.app/",
 
-    GitHubLink: "https://github.com/Isaacjosh23/Mortgage-Repayment.git",
+    GitHubLink: "https://github.com/Isaacjosh23/Ominfood.git",
   },
 
   {
     id: 3,
 
-    image: "../../images/project-img/mortgage.jpg",
+    image: "../../images/project-img/igeekmart.png",
 
-    Title: "Mortgage Repayment App",
+    Title: "iGeekMart",
 
     Description:
-      "This is sample project description random things are here in description This is sample project lorem ipsum generator for dummy content",
+      "This is a custom merchandise service that curates, designs, and ships branded merch—perfect for events, employees, or fans based on choice.",
 
-    Stack: "HTML, JavaScript, SASS, React",
+    Stack: "HTML, JavaScript, CSS, TailwindCSS",
 
-    Weblink: "https://mortpay.netlify.app/",
+    Weblink: "https://igeekmart.netlify.app/",
 
-    GitHubLink: "https://github.com/Isaacjosh23/Mortgage-Repayment.git",
+    GitHubLink: "https://github.com/Isaacjosh23/iGeekMart.git",
   },
 
   {
     id: 4,
 
-    image: "../../images/project-img/mortgage.jpg",
+    image: "../../images/project-img/african-touch.png",
 
-    Title: "Mortgage Repayment App",
+    Title: "African Touch",
 
     Description:
-      "This is sample project description random things are here in description This is sample project lorem ipsum generator for dummy content",
+      "An authentic African fashion brand blending heritage craftsmanship with modern style—each artisanal piece tells a story.",
 
-    Stack: "HTML, JavaScript, SASS, React",
+    Stack: "HTML, JavaScript, CSS, TailwindCSS",
 
-    Weblink: "https://mortpay.netlify.app/",
+    Weblink: "https://africantouch.netlify.app/",
 
-    GitHubLink: "https://github.com/Isaacjosh23/Mortgage-Repayment.git",
+    GitHubLink: "https://github.com/Isaacjosh23/AfricanTouch.git",
   },
 
   {
@@ -79,9 +79,9 @@ const projectObject = [
     Title: "Mortgage Repayment App",
 
     Description:
-      "This is sample project description random things are here in description This is sample project lorem ipsum generator for dummy content",
+      "This is a mortgage or loan repayment calculator tool—helps estimate monthly payments based on loan details.",
 
-    Stack: "HTML, JavaScript, SASS, React",
+    Stack: "React, TailwindCSS, CSS, Vite",
 
     Weblink: "https://mortpay.netlify.app/",
 
@@ -91,18 +91,69 @@ const projectObject = [
   {
     id: 6,
 
-    image: "../../images/project-img/mortgage.jpg",
+    image: "../../images/project-img/tip-calculator.jpg",
 
-    Title: "Mortgage Repayment App",
+    Title: "Tip Calculator",
 
     Description:
-      "This is sample project description random things are here in description This is sample project lorem ipsum generator for dummy content",
+      "This is a simple calculator to compute the tip and split the bill—ideal for dining with friends or group payments.",
 
-    Stack: "HTML, JavaScript, SASS, React",
+    Stack: "React, TailwindCSS, CSS, Vite",
 
-    Weblink: "https://mortpay.netlify.app/",
+    Weblink: "https://calctipfm.netlify.app/",
 
-    GitHubLink: "https://github.com/Isaacjosh23/Mortgage-Repayment.git",
+    GitHubLink: "https://github.com/Isaacjosh23/Tip-Calc-FrontendMentor.git",
+  },
+
+  {
+    id: 7,
+
+    image: "../../images/project-img/price-component.jpg",
+
+    Title: "Price Component",
+
+    Description:
+      "Possibly a pricing card or comparison UI component—displaying service tiers or product plans in card layouts.",
+
+    Stack: "React, TailwindCSS, CSS, Vite",
+
+    Weblink: "https://pricecom.netlify.app/",
+
+    GitHubLink: "https://github.com/Isaacjosh23/Price-Component.git",
+  },
+
+  {
+    id: 8,
+
+    image: "../../images/project-img/faq.jpg",
+
+    Title: "FAQ Accordion",
+
+    Description:
+      "A frequently-asked-questions section with expandable accordion functionality for neat, compact content display.",
+
+    Stack: "React, TailwindCSS, CSS, Vite",
+
+    Weblink: "https://faqac.netlify.app/",
+
+    GitHubLink: "https://github.com/Isaacjosh23/Faq-challenge.git",
+  },
+
+  {
+    id: 9,
+
+    image: "../../images/project-img/preview-card.jpg",
+
+    Title: "Product Card",
+
+    Description:
+      "This is a product listing or preview card layout—showcasing items with images, titles, and quick details for buyers.",
+
+    Stack: "React, TailwindCSS, CSS, Vite",
+
+    Weblink: "https://previewcar.netlify.app/",
+
+    GitHubLink: "https://github.com/Isaacjosh23/Product-Preview-Card.git",
   },
 ];
 

@@ -3,7 +3,7 @@ import Button from "../reuseable/Button.jsx";
 
 const Hero = () => {
   return (
-    <section className="py-20 ">
+    <section className="py-20">
       <Container className="flex flex-col justify-center  items-center gap-11 md:gap-16 md:grid md:grid-cols-2">
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-6">
@@ -92,11 +92,11 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center">
+        <div className="h-[25rem] w-[25rem] md:h-[30rem] md:w-[30rem] rounded-full img-gradient relative overflow-hidden">
           <img
-            src="../../images/joshua-temp.png"
+            src="../../images/joshua-hero.jpg"
             alt="Photo of Joshua"
-            className="w-96 md:w-[28rem]"
+            className="w-96 md:w-[28rem] absolute hero-img grayscale-100 rounded-full top-[-46%] left-[50%] md:top-[-43%]"
           />
         </div>
       </Container>
