@@ -92,7 +92,7 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="h-[25rem] w-[25rem] md:h-[30rem] md:w-[30rem] rounded-full img-gradient relative overflow-hidden">
+        <div className="h-[25rem] w-[25rem] md:h-[30rem] md:w-[30rem] rounded-full img-gradient relative overflow-hidden justify-self-center">
           <img
             src="../../images/joshua-hero.jpg"
             alt="Photo of Joshua"
