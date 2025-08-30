@@ -1,4 +1,6 @@
 import Container from "../reuseable/Container";
+import Section from "../reuseable/Section";
+import Tag from "../reuseable/Tag";
 
 const projectObject = [
   {
@@ -106,11 +108,11 @@ const projectObject = [
 
 const Projects = () => {
   return (
-    <section className="py-20">
+    <Section className="py-20 lg:py-32">
       <Container className="flex flex-col gap-12 md:gap-20 lg:gap-32">
-        <div className="flex flex-col gap-4 md:gap-7 text-center">
-          <h3 className="text-3xl md:text-4xl font-bold">Projects</h3>
-          <p className="font-normal md:text-[1.3rem]">
+        <div className="flex flex-col gap-4 md:gap-7 items-center text-center">
+          <Tag>Projects</Tag>
+          <p className="text-xl md:text-[1.35rem] text-center">
             Things I’ve built so far
           </p>
         </div>
@@ -123,13 +125,13 @@ const Projects = () => {
           </ul>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 };
 
 const Project = ({ project }) => {
   return (
-    <li className="rounded-2xl project-card w-[28rem] md:justify-self-center">
+    <li className="rounded-2xl bg-white custom-shadow w-[28rem] md:justify-self-center">
       <div className="rounded-t-2xl overflow-hidden">
         <img
           src={project.image}

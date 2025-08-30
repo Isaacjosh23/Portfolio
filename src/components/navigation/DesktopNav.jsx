@@ -26,15 +26,6 @@ const DesktopNav = () => {
               href="#"
               className="lg:text-[1.6rem] md:text-[1.4rem]  font-medium text-[var(--color-grey)] nav-links"
             >
-              Tech Stack
-            </a>
-          </li>
-
-          <li>
-            <a
-              href="#"
-              className="lg:text-[1.6rem] md:text-[1.4rem]  font-medium text-[var(--color-grey)] nav-links"
-            >
               Projects
             </a>
           </li>
@@ -51,45 +42,14 @@ const DesktopNav = () => {
       </nav>
 
       <div className="md:flex md:items-center md:gap-10 hidden">
-        <ul className="flex items-center gap-5">
-          {/* Github */}
-          <li>
-            <a href="https://github.com/Isaacjosh23" target="_blank">
-              <ion-icon
-                name="logo-github"
-                className="lg:w-[2.8rem] lg:h-[2.8rem] w-[2.5rem] h-[2.5rem] text-[var(--color-grey)]"
-              ></ion-icon>
-            </a>
-          </li>
+        <a
+          href="#"
+          className="p-4 bg-black text-white md:text-[1.4rem] lg:text-[1.6rem] hover:bg-[#333] smooth-trans hover-shadow custom-shadow rounded-3xl"
+        >
+          Download CV
+        </a>
 
-          {/* Twitter */}
-          <li>
-            <a
-              href="https://x.com/codes_from_josh?t=0p-3oxHXbpKMiF47B1XEIg&s=09"
-              target="_blank"
-            >
-              <ion-icon
-                name="logo-twitter"
-                className="lg:w-[2.8rem] lg:h-[2.8rem] w-[2.5rem] h-[2.5rem] text-[var(--color-grey)]"
-              ></ion-icon>
-            </a>
-          </li>
-
-          {/* Linkedin */}
-          <li>
-            <a
-              href="https://www.linkedin.com/in/joshua-ebhamen-4904aa344/"
-              target="_blank"
-            >
-              <ion-icon
-                name="logo-linkedin"
-                className="lg:w-[2.8rem] lg:h-[2.8rem] w-[2.5rem] h-[2.5rem] text-[var(--color-grey)]"
-              ></ion-icon>
-            </a>
-          </li>
-        </ul>
-
-        <button className="flex items-center cursor-pointer p-2 rounded-[8px] theme-btn">
+        <button className="flex items-center cursor-pointer p-2 rounded-[8px] custom-shadow">
           <ion-icon
             name="sunny-outline"
             className="lg:w-[2.8rem] lg:h-[2.8rem] w-[2.5rem] h-[2.5rem] hidden text-[var(--color-grey)]"

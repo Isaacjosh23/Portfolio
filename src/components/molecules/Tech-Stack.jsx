@@ -1,12 +1,14 @@
 import Container from "../reuseable/Container";
+import Section from "../reuseable/Section";
+import Tag from "../reuseable/Tag";
 
 const TechStack = () => {
   return (
-    <section className="py-20">
+    <Section className="py-20">
       <Container className="flex flex-col gap-12 md:gap-20 lg:gap-32">
-        <div className="flex flex-col gap-4 md:gap-7 text-center">
-          <h3 className="text-3xl md:text-4xl font-bold">My Tech Stack</h3>
-          <p className="font-normal md:text-[1.3rem]">
+        <div className="flex flex-col items-center gap-4 md:gap-7 text-center">
+          <Tag>Tech Stack</Tag>
+          <p className="text-xl md:text-[1.35rem] text-center">
             Technologies I’ve been working with recently
           </p>
         </div>
@@ -80,7 +82,7 @@ const TechStack = () => {
           </ul>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 };
 

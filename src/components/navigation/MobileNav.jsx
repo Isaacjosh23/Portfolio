@@ -15,7 +15,7 @@ const MobileNav = () => {
     <>
       {navIsOpen && (
         <nav className="main-nav absolute w-full h-screen invisible opacity-0 pointer-events-none z-[45] smooth-trans nav-position">
-          <ul className="flex flex-col bg-white items-start gap-10 h-screen">
+          <ul className="flex flex-col bg-white items-center gap-10 h-screen">
             <li>
               <a href="#" className="text-[1.5rem] font-bold nav-links">
                 Home
@@ -25,12 +25,6 @@ const MobileNav = () => {
             <li>
               <a href="#" className="text-[1.5rem] font-bold nav-links">
                 About
-              </a>
-            </li>
-
-            <li>
-              <a href="#" className="text-[1.5rem] font-bold nav-links">
-                Tech Stack
               </a>
             </li>
 
@@ -46,17 +40,26 @@ const MobileNav = () => {
               </a>
             </li>
 
-            <button>
-              <ion-icon
-                name="sunny-outline"
-                className="w-[2.5rem] h-[2.5rem] hidden"
-              ></ion-icon>
+            <div className="flex flex-col justify-center items-center gap-10">
+              <a
+                href="#"
+                className="p-4 bg-black text-white text-[1.3rem] font-bold rounded-3xl block hover:bg-[#333] smooth-trans hover-shadow custom-shadow"
+              >
+                Download CV
+              </a>
 
-              <ion-icon
-                name="moon-outline"
-                className="w-[2.5rem] h-[2.5rem]"
-              ></ion-icon>
-            </button>
+              <button className="flex items-center gap-4 p-2 rounded-[8px] custom-shadow">
+                <ion-icon
+                  name="sunny-outline"
+                  className="w-[2.5rem] h-[2.5rem] hidden"
+                ></ion-icon>
+
+                <ion-icon
+                  name="moon-outline"
+                  className="w-[2.5rem] h-[2.5rem]"
+                ></ion-icon>
+              </button>
+            </div>
           </ul>
         </nav>
       )}

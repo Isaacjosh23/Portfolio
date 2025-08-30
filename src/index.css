@@ -7,6 +7,12 @@
 :root {
   --color-solid: #42446e;
   --color-grey: #666;
+  --color-grey-50: #f9fafb;
+  --color-grey-100: #f3f4f6;
+  --color-grey-200: #e5e7eb;
+  --color-grey-600: #4b5563;
+  --color-grey-700: #374151;
+  --color-grey-900: #111827;
 }
 
 html {
@@ -63,7 +69,7 @@ body {
 }
 
 .nav-position ul {
-  padding: 22% 20%;
+  padding: 22% 45% 22% 10%;
 }
 
 .smooth-trans {
@@ -75,15 +81,7 @@ body {
   transition: all 0.3s;
 }
 
-.theme-btn {
-  box-shadow: 0 0 8px 2px rgba(102, 102, 102, 0.4);
-}
-
-.project-card {
-  box-shadow: 0 0 8px 2px rgba(102, 102, 102, 0.3);
-}
-
-.cus-shadow {
+.custom-shadow {
   box-shadow: 0 0 8px 2px rgba(102, 102, 102, 0.3);
 }
 
