@@ -52,7 +52,7 @@ const Hero = () => {
               </Button>
             </div>
 
-            <ul className="flex items-center gap-5">
+            <ul className="flex items-center">
               {/* Github */}
               <li>
                 <a

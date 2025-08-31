@@ -50,17 +50,17 @@ const GetInTouch = () => {
             You can also find me on these platforms!
           </p>
 
-          <ul className="flex items-center gap-6">
+          <ul className="flex items-center">
             {/* Github */}
             <li>
               <a
                 href="https://github.com/Isaacjosh23"
                 target="_blank"
-                className="text-[var(--color-solid)] hover:text-black smooth-trans"
+                className="text-[var(--color-solid)] hover:text-black smooth-trans p-2.5"
               >
                 <ion-icon
                   name="logo-github"
-                  className="w-[2.5rem] lg:w-[2.8rem] lg:h-[2.8rem] h-[2.5rem] "
+                  className="w-[2.5rem] lg:w-[2.8rem] lg:h-[2.8rem] h-[2.5rem]"
                 ></ion-icon>
               </a>
             </li>
@@ -70,7 +70,7 @@ const GetInTouch = () => {
               <a
                 href="https://x.com/codes_from_josh?t=0p-3oxHXbpKMiF47B1XEIg&s=09"
                 target="_blank"
-                className="text-[var(--color-solid)] hover:text-black smooth-trans"
+                className="text-[var(--color-solid)] hover:text-black smooth-trans p-2.5"
               >
                 <ion-icon
                   name="logo-twitter"
@@ -84,7 +84,7 @@ const GetInTouch = () => {
               <a
                 href="https://www.linkedin.com/in/joshua-ebhamen-4904aa344/"
                 target="_blank"
-                className="text-[var(--color-solid)] hover:text-black smooth-trans"
+                className="text-[var(--color-solid)] hover:text-black smooth-trans p-2.5"
               >
                 <ion-icon
                   name="logo-linkedin"
