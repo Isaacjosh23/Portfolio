@@ -52,13 +52,17 @@ const Hero = () => {
               </Button>
             </div>
 
-            <ul className="flex items-center gap-5">
+            <ul className="flex items-center">
               {/* Github */}
               <li>
-                <a href="https://github.com/Isaacjosh23" target="_blank">
+                <a
+                  href="https://github.com/Isaacjosh23"
+                  target="_blank"
+                  className="text-[var(--color-grey)] hover:text-black smooth-trans p-2.5"
+                >
                   <ion-icon
                     name="logo-github"
-                    className="lg:w-[2.8rem] lg:h-[2.8rem] w-[2.5rem] h-[2.5rem] text-[var(--color-grey)]"
+                    className="lg:w-[2.8rem] lg:h-[2.8rem] w-[2.5rem] h-[2.5rem]"
                   ></ion-icon>
                 </a>
               </li>
@@ -68,10 +72,11 @@ const Hero = () => {
                 <a
                   href="https://x.com/codes_from_josh?t=0p-3oxHXbpKMiF47B1XEIg&s=09"
                   target="_blank"
+                  className="text-[var(--color-grey)] hover:text-black smooth-trans p-2.5"
                 >
                   <ion-icon
                     name="logo-twitter"
-                    className="lg:w-[2.8rem] lg:h-[2.8rem] w-[2.5rem] h-[2.5rem] text-[var(--color-grey)]"
+                    className="lg:w-[2.8rem] lg:h-[2.8rem] w-[2.5rem] h-[2.5rem]"
                   ></ion-icon>
                 </a>
               </li>
@@ -81,10 +86,11 @@ const Hero = () => {
                 <a
                   href="https://www.linkedin.com/in/joshua-ebhamen-4904aa344/"
                   target="_blank"
+                  className="text-[var(--color-grey)] hover:text-black smooth-trans p-2.5"
                 >
                   <ion-icon
                     name="logo-linkedin"
-                    className="lg:w-[2.8rem] lg:h-[2.8rem] w-[2.5rem] h-[2.5rem] text-[var(--color-grey)]"
+                    className="lg:w-[2.8rem] lg:h-[2.8rem] w-[2.5rem] h-[2.5rem]"
                   ></ion-icon>
                 </a>
               </li>
