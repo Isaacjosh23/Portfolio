@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const useResponsiveAmount = () => {
   const [amount, setAmount] = useState(() =>
-    window.innerWidth <= 425 ? 0.2 : 0.4
+    window.innerWidth <= 425 ? 0.05 : 0.2
   );
 
   useEffect(() => {

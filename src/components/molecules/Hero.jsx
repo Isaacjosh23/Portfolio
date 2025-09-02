@@ -40,7 +40,7 @@ const Hero = () => {
             >
               Hi 👋, <br className="hidden md:block" /> My name is
               <br className="hidden md:block" />
-              <span className="gradient"> Pavan MG</span>
+              <span className="gradient"> Ebhamen Joshua</span>
             </motion.h1>
 
             <motion.p

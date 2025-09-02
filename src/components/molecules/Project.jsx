@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import Container from "../reuseable/Container";
 import Section from "../reuseable/Section";
 import Tag from "../reuseable/Tag";
-import { motion, useAnimation, useInView } from "framer-motion";
+import { motion, useAnimationControls, useInView } from "framer-motion";
 import useResponsiveAmount from "../hooks/useResponsiveAmount";
 
 const projectObject = [
@@ -160,71 +160,78 @@ const projectObject = [
   },
 ];
 
-const tagVariants = {
-  hidden: { x: 100, opacity: 0 },
-  visible: { x: 0, opacity: 1, transition: { duration: 0.6 } },
-};
-
-const listVariants = {
-  hidden: { y: 100, opacity: 0 },
+const slideRightVariant = {
+  init: { opacity: 0, x: 100 },
   visible: {
-    y: 0,
     opacity: 1,
-    transition: { staggerChildren: 0.2, duration: 0.6 },
+    x: 0,
+    transition: { duration: 0.6, ease: "easeOut", staggerChildren: 0.2 },
+  },
+  out: {
+    opacity: 0,
+    x: 100,
+    transition: { duration: 0.4, ease: "easeIn", staggerChildren: 0.15 },
   },
 };
 
-const liVariants = {
-  hidden: { y: 100, pointerEvents: "none", opacity: 0 },
+const slideBottomVariant = {
+  init: { opacity: 0, y: 100 },
   visible: {
-    y: 0,
     opacity: 1,
-    pointerEvents: "auto",
-    transition: { duration: 0.6 },
+    y: 0,
+    transition: { duration: 0.9, ease: "easeOut", staggerChildren: 0.2 },
+  },
+  out: {
+    opacity: 0,
+    y: 100,
+    transition: { duration: 0.4, ease: "easeIn", staggerChildren: 0.15 },
   },
 };
 
 const Projects = () => {
   const ref = useRef(null);
   const amount = useResponsiveAmount();
-  const isInView = useInView(ref, { once: false, amount });
-
-  const tagControls = useAnimation();
-  const listControls = useAnimation();
+  const inView = useInView(ref, { amount });
+  const controls = useAnimationControls();
 
   useEffect(() => {
-    if (isInView) {
-      tagControls.start("visible");
-      listControls.start("visible");
-    } else {
-      tagControls.start("hidden");
-      listControls.start("hidden");
-    }
-  }, [isInView, tagControls, listControls]);
+    if (inView) controls.start("visible");
+    else controls.start("out");
+  }, [inView, controls]);
 
   return (
-    <Section ref={ref} className="py-20 lg:py-32">
-      <Container className="flex flex-col gap-12 md:gap-20 lg:gap-32">
+    <Section
+      ref={ref}
+      initial="init"
+      animate={controls}
+      variants={slideRightVariant}
+      className="py-20 lg:py-32"
+    >
+      <Container
+        variants={slideRightVariant}
+        className="flex flex-col gap-12 md:gap-20 lg:gap-32"
+      >
         <motion.div
-          variants={tagVariants}
-          initial="hidden"
-          animate={tagControls}
+          variants={slideRightVariant}
           className="flex flex-col gap-4 md:gap-7 items-center text-center"
         >
-          <Tag>Projects</Tag>
-          <p className="text-xl md:text-[1.35rem] text-center">
+          <Tag as={motion.div} variants={slideRightVariant}>
+            Projects
+          </Tag>
+          <motion.p
+            variants={slideRightVariant}
+            className="text-xl md:text-[1.35rem] text-center"
+          >
             Things I’ve built so far
-          </p>
+          </motion.p>
         </motion.div>
 
         <motion.ul
-          variants={listVariants}
-          initial="hidden"
-          animate={listControls}
+          variants={slideBottomVariant}
           className="flex flex-col justify-center items-center gap-24 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-0 md:gap-y-16"
         >
           {projectObject.map((project) => (
-            <Project key={project.id} project={project} isInView={isInView} />
+            <Project key={project.id} project={project} />
           ))}
         </motion.ul>
       </Container>
@@ -232,12 +239,10 @@ const Projects = () => {
   );
 };
 
-const Project = ({ project, isInView }) => {
+const Project = ({ project }) => {
   return (
     <motion.li
-      variants={liVariants}
-      aria-hidden={isInView ? "false" : "true"}
-      tabIndex={isInView ? 0 : -1}
+      variants={slideBottomVariant}
       className="rounded-2xl bg-white custom-shadow w-[28rem] md:justify-self-center"
     >
       <div className="rounded-t-2xl overflow-hidden">
