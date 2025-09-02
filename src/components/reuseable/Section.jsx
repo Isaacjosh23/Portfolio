@@ -1,9 +1,12 @@
-const Section = ({ children, className = "", ...props }) => {
+import { motion } from "framer-motion";
+import { forwardRef } from "react";
+
+const Section = forwardRef(({ children, className = "", ...props }, ref) => {
   return (
-    <section className={`${className}`} {...props}>
+    <motion.section ref={ref} className={`${className}`} {...props}>
       {children}
-    </section>
+    </motion.section>
   );
-};
+});
 
 export default Section;

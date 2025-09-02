@@ -1,22 +1,64 @@
+import { motion, useAnimationControls, useInView } from "framer-motion";
+import { useEffect, useRef } from "react";
 import Container from "../reuseable/Container";
 import Section from "../reuseable/Section";
 import Tag from "../reuseable/Tag";
+import useResponsiveAmount from "../hooks/useResponsiveAmount";
+
+const containerVariants = {
+  init: {},
+  visible: {
+    transition: { staggerChildren: 0.4, staggerDirection: -1 },
+  },
+  out: {
+    transition: { staggerChildren: 0.3, staggerDirection: 1 },
+  },
+};
+
+const childVariants = {
+  init: { opacity: 0, x: 90 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  out: { opacity: 0, x: -90, transition: { duration: 0.4, ease: "easeIn" } },
+};
 
 const About = () => {
+  const ref = useRef(null);
+
+  const amount = useResponsiveAmount();
+
+  const inView = useInView(ref, { amount });
+
+  const controls = useAnimationControls();
+
+  useEffect(() => {
+    if (inView) controls.start("visible");
+    else controls.start("out");
+  }, [inView, controls]);
+
   return (
-    <Section className="bg-[var(--color-grey-50)] py-20 lg:py-32">
-      <Container className="flex flex-col items-center gap-6 md:gap-12">
-        <Tag>About me</Tag>
+    <Section ref={ref} className="bg-[var(--color-grey-50)] py-20 lg:py-32">
+      <Container
+        variants={containerVariants}
+        initial="init"
+        animate={controls}
+        className="flex flex-col items-center gap-6 md:gap-12"
+      >
+        <Tag variants={childVariants}>About me</Tag>
         <div className="flex flex-col justify-center gap-16 md:grid md:grid-cols-2">
-          <div className="flex justify-center md:items-center">
+          <motion.div
+            variants={childVariants}
+            className="flex justify-center md:items-center"
+          >
             <img
               src="../../images/joshua-about.jpg"
               alt="photo of josh"
               className="w-80 md:w-[26rem]"
+              loading="lazy"
+              decoding="async"
             />
-          </div>
+          </motion.div>
 
-          <div className="flex flex-col gap-6">
+          <motion.div variants={childVariants} className="flex flex-col gap-6">
             <h3 className="text-black font-bold text-2xl md:text-3xl lg:text-4xl">
               Curious about me? Here you have it:
             </h3>
@@ -85,7 +127,7 @@ const About = () => {
                 hello; I'm available for freelance work! I swear not to bite 😉.
               </span>
             </p>
-          </div>
+          </motion.div>
         </div>
       </Container>
     </Section>

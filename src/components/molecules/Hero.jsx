@@ -1,27 +1,63 @@
+import { motion } from "framer-motion";
+import Section from "../reuseable/Section.jsx";
 import Container from "../reuseable/Container";
 import Button from "../reuseable/Button.jsx";
 
+const containerVarients = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+
+    transition: {
+      staggerChildren: 0.2,
+      duration: 0.9,
+      ease: "easeOut",
+    },
+  },
+};
+
+const childVarients = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0 },
+};
+
 const Hero = () => {
   return (
-    <section className="py-20">
+    <Section
+      variants={containerVarients}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      className="py-20"
+    >
       <Container className="flex flex-col justify-center  items-center gap-11 md:gap-16 md:grid md:grid-cols-2">
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-6">
-            <h1 className="text-4xl font-bold text-[var(--color-solid)] text-center leading-[3.5rem] md:text-start md:leading-[4rem] md:text-5xl">
+            <motion.h1
+              variants={childVarients}
+              className="text-4xl font-bold text-[var(--color-solid)] text-center leading-[3.5rem] md:text-start md:leading-[4rem] md:text-5xl"
+            >
               Hi 👋, <br className="hidden md:block" /> My name is
               <br className="hidden md:block" />
               <span className="gradient"> Pavan MG</span>
-            </h1>
+            </motion.h1>
 
-            <p className="text-center text-xl lg:text-[1.4rem] text-[var(--color-solid)] md:text-start">
+            <motion.p
+              variants={childVarients}
+              className="text-center text-xl lg:text-[1.4rem] text-[var(--color-solid)] md:text-start"
+            >
               As a frontend developer, I specialize on producing outstanding
               digital experiences that are responsive, quick, easy to use, and
               aesthetically pleasing. I still adore web applications as though
               they were brand-new, despite the fact that I have been making them
               for more than two years.
-            </p>
+            </motion.p>
 
-            <div className="flex items-center justify-center md:justify-start gap-4">
+            <motion.div
+              variants={childVarients}
+              className="flex items-center justify-center md:justify-start gap-4"
+            >
               <p className="flex items-center gap-2 font-medium lg:text-xl">
                 <ion-icon
                   name="location-outline"
@@ -38,11 +74,14 @@ const Hero = () => {
                 ></ion-icon>
                 <span>Available for new projects</span>
               </p>
-            </div>
+            </motion.div>
           </div>
 
           <div className="flex flex-col items-center md:items-start gap-12">
-            <div className="flex items-center justify-center md:justify-start gap-6">
+            <motion.div
+              variants={childVarients}
+              className="flex items-center justify-center md:justify-start gap-6"
+            >
               <Button className="text-[1.3rem] custom-shadow bg-black text-white hover-shadow">
                 Contact
               </Button>
@@ -50,9 +89,9 @@ const Hero = () => {
               <Button className="text-[1.3rem] custom-shadow text-black hover-shadow">
                 Projects
               </Button>
-            </div>
+            </motion.div>
 
-            <ul className="flex items-center">
+            <motion.ul variants={childVarients} className="flex items-center">
               {/* Github */}
               <li>
                 <a
@@ -94,7 +133,7 @@ const Hero = () => {
                   ></ion-icon>
                 </a>
               </li>
-            </ul>
+            </motion.ul>
           </div>
         </div>
 
@@ -103,10 +142,11 @@ const Hero = () => {
             src="../../images/joshua-hero.jpg"
             alt="Photo of Joshua"
             className="w-96 md:w-[28rem] absolute hero-img grayscale-100 rounded-full top-[-46%] left-[50%] md:top-[-43%]"
+            loading="lazy"
           />
         </div>
       </Container>
-    </section>
+    </Section>
   );
 };
 

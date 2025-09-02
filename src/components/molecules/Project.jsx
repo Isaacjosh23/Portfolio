@@ -1,6 +1,9 @@
+import { useEffect, useRef } from "react";
 import Container from "../reuseable/Container";
 import Section from "../reuseable/Section";
 import Tag from "../reuseable/Tag";
+import { motion, useAnimation, useInView } from "framer-motion";
+import useResponsiveAmount from "../hooks/useResponsiveAmount";
 
 const projectObject = [
   {
@@ -157,32 +160,86 @@ const projectObject = [
   },
 ];
 
+const tagVariants = {
+  hidden: { x: 100, opacity: 0 },
+  visible: { x: 0, opacity: 1, transition: { duration: 0.6 } },
+};
+
+const listVariants = {
+  hidden: { y: 100, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { staggerChildren: 0.2, duration: 0.6 },
+  },
+};
+
+const liVariants = {
+  hidden: { y: 100, pointerEvents: "none", opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    pointerEvents: "auto",
+    transition: { duration: 0.6 },
+  },
+};
+
 const Projects = () => {
+  const ref = useRef(null);
+  const amount = useResponsiveAmount();
+  const isInView = useInView(ref, { once: false, amount });
+
+  const tagControls = useAnimation();
+  const listControls = useAnimation();
+
+  useEffect(() => {
+    if (isInView) {
+      tagControls.start("visible");
+      listControls.start("visible");
+    } else {
+      tagControls.start("hidden");
+      listControls.start("hidden");
+    }
+  }, [isInView, tagControls, listControls]);
+
   return (
-    <Section className="py-20 lg:py-32">
+    <Section ref={ref} className="py-20 lg:py-32">
       <Container className="flex flex-col gap-12 md:gap-20 lg:gap-32">
-        <div className="flex flex-col gap-4 md:gap-7 items-center text-center">
+        <motion.div
+          variants={tagVariants}
+          initial="hidden"
+          animate={tagControls}
+          className="flex flex-col gap-4 md:gap-7 items-center text-center"
+        >
           <Tag>Projects</Tag>
           <p className="text-xl md:text-[1.35rem] text-center">
             Things I’ve built so far
           </p>
-        </div>
+        </motion.div>
 
-        <div>
-          <ul className="flex flex-col justify-center items-center gap-24 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-0 md:gap-y-16">
-            {projectObject.map((project) => (
-              <Project key={project.id} project={project} />
-            ))}
-          </ul>
-        </div>
+        <motion.ul
+          variants={listVariants}
+          initial="hidden"
+          animate={listControls}
+          className="flex flex-col justify-center items-center gap-24 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-0 md:gap-y-16"
+        >
+          {projectObject.map((project) => (
+            <Project key={project.id} project={project} isInView={isInView} />
+          ))}
+        </motion.ul>
       </Container>
     </Section>
   );
 };
 
-const Project = ({ project }) => {
+const Project = ({ project, isInView }) => {
   return (
-    <li className="rounded-2xl bg-white custom-shadow w-[28rem] md:justify-self-center">
+    <motion.li
+      variants={liVariants}
+      aria-hidden={isInView ? "false" : "true"}
+      tabIndex={isInView ? 0 : -1}
+      className="rounded-2xl bg-white custom-shadow w-[28rem] md:justify-self-center"
+    >
       <div className="rounded-t-2xl overflow-hidden">
         <img
           src={project.image}
@@ -240,7 +297,7 @@ const Project = ({ project }) => {
           </a>
         </div>
       </div>
-    </li>
+    </motion.li>
   );
 };
 

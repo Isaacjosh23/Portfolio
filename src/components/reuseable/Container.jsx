@@ -1,9 +1,12 @@
-const Container = ({ children, className = "", ...props }) => {
+import { motion } from "framer-motion";
+import { forwardRef } from "react";
+
+const Container = forwardRef(({ children, className = "", ...props }, ref) => {
   return (
-    <div className={`container ${className}`} {...props}>
+    <motion.div ref={ref} className={`container ${className}`} {...props}>
       {children}
-    </div>
+    </motion.div>
   );
-};
+});
 
 export default Container;

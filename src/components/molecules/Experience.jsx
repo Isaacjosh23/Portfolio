@@ -1,6 +1,9 @@
+import { useEffect, useRef } from "react";
 import Container from "../reuseable/Container";
 import Section from "../reuseable/Section";
 import Tag from "../reuseable/Tag";
+import { motion, useAnimationControls, useInView } from "framer-motion";
+import useResponsiveAmount from "../hooks/useResponsiveAmount";
 
 const workExperiences = [
   {
@@ -25,23 +28,86 @@ const workExperiences = [
   },
 ];
 
+const slideLeftVariant = {
+  init: { opacity: 0, x: -100 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6, ease: "easeOut", staggerChildren: 0.2 },
+  },
+  out: {
+    opacity: 0,
+    x: -100,
+    transition: { duration: 0.4, ease: "easeIn", staggerChildren: 0.15 },
+  },
+};
+
+// Bottom slide variant (Experience cards)
+const slideBottomVariant = {
+  init: { opacity: 0, y: 100 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.9, ease: "easeOut", staggerChildren: 0.2 },
+  },
+  out: {
+    opacity: 0,
+    y: 100,
+    transition: { duration: 0.4, ease: "easeIn", staggerChildren: 0.15 },
+  },
+};
+
 const Experience = () => {
+  const ref = useRef(null);
+  const amount = useResponsiveAmount();
+  const inView = useInView(ref, { amount });
+  const controls = useAnimationControls();
+
+  useEffect(() => {
+    if (inView) controls.start("visible");
+    else controls.start("out");
+  }, [inView, controls]);
+
   return (
-    <Section className="py-20 lg:py-32 bg-[var(--color-grey-50)]">
-      <Container className="flex flex-col items-center gap-12 md:gap-20 lg:gap-32">
-        <div className="flex flex-col gap-4 md:gap-7 items-center text-center">
-          <Tag className="font-normal md:text-[1.3rem]">Experience</Tag>
+    <Section
+      ref={ref}
+      initial="init"
+      animate={controls}
+      variants={slideLeftVariant}
+      className="py-20 lg:py-32 bg-[var(--color-grey-50)]"
+    >
+      <Container
+        variants={slideLeftVariant}
+        className="flex flex-col items-center gap-12 md:gap-20 lg:gap-32"
+      >
+        <motion.div
+          variants={slideLeftVariant}
+          className="flex flex-col gap-4 md:gap-7 items-center text-center"
+        >
+          <Tag
+            as={motion.div}
+            variants={slideLeftVariant}
+            className="font-normal md:text-[1.3rem]"
+          >
+            Experience
+          </Tag>
 
-          <p className="text-xl md:text-[1.35rem] text-center">
+          <motion.p
+            variants={slideLeftVariant}
+            className="text-xl md:text-[1.35rem] text-center"
+          >
             Here is a quick summary of my most recent experiences:
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <ul className="flex flex-col justify-center gap-16 md:grid md:grid-cols-3">
+        <motion.ul
+          variants={slideBottomVariant}
+          className="flex flex-col justify-center gap-16 md:grid md:grid-cols-3"
+        >
           {workExperiences.map((work) => (
             <ExperienceCard key={work.id} work={work} workTask={work.tasks} />
           ))}
-        </ul>
+        </motion.ul>
       </Container>
     </Section>
   );
@@ -49,7 +115,10 @@ const Experience = () => {
 
 const ExperienceCard = ({ work, workTask }) => {
   return (
-    <li className="bg-white p-12 rounded-2xl custom-shadow flex flex-col justify-center gap-8 w-[28rem] md:col-span-full md:w-full md:items-center">
+    <motion.li
+      variants={slideBottomVariant}
+      className="bg-white p-12 rounded-2xl custom-shadow flex flex-col justify-center gap-8 w-[28rem] md:col-span-full md:w-full md:items-center"
+    >
       <div className="flex flex-col md:flex-row justify-center gap-2 md:gap-32">
         <a
           href={work.companyLink}
@@ -71,8 +140,8 @@ const ExperienceCard = ({ work, workTask }) => {
           <h3 className="text-2xl text-black font-semibold">{work.role}</h3>
 
           <ul className="flex flex-col justify-center gap-3 list-disc">
-            {workTask.map((task) => (
-              <ExperienceTask task={task} />
+            {workTask.map((task, i) => (
+              <ExperienceTask task={task} key={i} />
             ))}
           </ul>
         </div>
@@ -81,11 +150,11 @@ const ExperienceCard = ({ work, workTask }) => {
       </div>
 
       <ul className="flex flex-col justify-center gap-3 list-disc md:hidden">
-        {workTask.map((task) => (
-          <ExperienceTask task={task} />
+        {workTask.map((task, i) => (
+          <ExperienceTask task={task} key={i} />
         ))}
       </ul>
-    </li>
+    </motion.li>
   );
 };
 
