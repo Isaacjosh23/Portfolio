@@ -81,16 +81,31 @@ const GetInTouch = () => {
             ></ion-icon>
           </motion.div>
 
+          <motion.div variants={slideLeftVariant}>
+            <a
+              href="https://api.whatsapp.com/send?phone=2348132853469&text=Hi%20Joshua%2C%0A%0AMy%20name%20is%20"
+              target="_blank"
+              className="font-semibold flex text-black items-center gap-3 text-[1.4rem] md:text-[1.8rem] lg:text-[2.2rem] underline hover:no-underline"
+            >
+              <ion-icon name="logo-whatsapp" className="w-7 h-7"></ion-icon>
+              <span>08132853469</span>
+              <ion-icon
+                name="copy-outline"
+                className="w-7 h-7 cursor-pointer"
+              ></ion-icon>
+            </a>
+          </motion.div>
+
           <motion.div
             variants={slideLeftVariant}
             className="flex items-center gap-6"
           >
             <a
-              href="tel:+91 12345 09876"
+              href="tel:+234 8140458966"
               className="font-semibold flex text-black items-center gap-3 text-[1.4rem] md:text-[1.8rem] lg:text-[2.2rem] underline hover:no-underline"
             >
               <ion-icon name="call-outline" className="w-7 h-7"></ion-icon>
-              <span>+91 12345 09876</span>
+              <span>+234 8140458966</span>
             </a>
             <ion-icon
               name="copy-outline"

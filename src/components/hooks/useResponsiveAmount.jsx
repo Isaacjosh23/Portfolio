@@ -7,7 +7,7 @@ const useResponsiveAmount = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setAmount(window.innerWidth <= 425 ? 0.05 : 0.4);
+      setAmount(window.innerWidth <= 425 ? 0.05 : 0.2);
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
