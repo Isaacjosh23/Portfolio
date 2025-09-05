@@ -1,8 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Container from "../reuseable/Container";
 import Section from "../reuseable/Section";
 import Tag from "../reuseable/Tag";
-import { motion, useAnimationControls, useInView } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useAnimationControls,
+  useInView,
+} from "framer-motion";
 import useResponsiveAmount from "../hooks/useResponsiveAmount";
 
 const projectObject = [
@@ -194,10 +199,33 @@ const Projects = () => {
   const inView = useInView(ref, { amount });
   const controls = useAnimationControls();
 
+  // Responsive Projects per page
+  const [currentPage, setCurrentPage] = useState(1);
+  const [projectsPerPage, setProjectsPerPage] = useState(3);
+
+  useEffect(() => {
+    const updateProjectsPerPage = () => {
+      if (window.innerWidth >= 1024) setProjectsPerPage(6);
+      else if (window.innerWidth >= 768) setProjectsPerPage(4);
+      else setProjectsPerPage(3);
+    };
+
+    updateProjectsPerPage();
+    window.addEventListener("resize", updateProjectsPerPage);
+
+    return () => window.removeEventListener("resize", updateProjectsPerPage);
+  }, []);
+
+  const indexOfLast = currentPage * projectsPerPage;
+  const indexOfFirst = indexOfLast - projectsPerPage;
+  const currentProjects = projectObject.slice(indexOfFirst, indexOfLast);
+
+  const totalPages = Math.ceil(projectObject.length / projectsPerPage);
+
   useEffect(() => {
     if (inView) controls.start("visible");
     else controls.start("out");
-  }, [inView, controls]);
+  }, [inView, controls, currentPage]);
 
   return (
     <Section
@@ -226,14 +254,37 @@ const Projects = () => {
           </motion.p>
         </motion.div>
 
-        <motion.ul
-          variants={slideBottomVariant}
-          className="flex flex-col justify-center items-center gap-24 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-0 md:gap-y-16"
-        >
-          {projectObject.map((project) => (
-            <Project key={project.id} project={project} />
+        <AnimatePresence mode="wait">
+          <motion.ul
+            key={currentPage}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            // variants={slideBottomVariant}
+            className="flex flex-col justify-center items-center gap-24 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-0 md:gap-y-16"
+          >
+            {currentProjects.map((project) => (
+              <Project key={project.id} project={project} />
+            ))}
+          </motion.ul>
+        </AnimatePresence>
+
+        <div className="flex justify-center gap-3 mt-6">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => setCurrentPage(index + 1)}
+              className={`px-4 py-2 rounded-full border ${
+                currentPage === index + 1
+                  ? "bg-black text-white"
+                  : "bg-white text-black"
+              }`}
+            >
+              {index + 1}
+            </button>
           ))}
-        </motion.ul>
+        </div>
       </Container>
     </Section>
   );
@@ -242,7 +293,11 @@ const Projects = () => {
 const Project = ({ project }) => {
   return (
     <motion.li
-      variants={slideBottomVariant}
+      // variants={slideBottomVariant}
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
       className="rounded-2xl bg-white custom-shadow w-[28rem] md:justify-self-center"
     >
       <div className="rounded-t-2xl overflow-hidden">
