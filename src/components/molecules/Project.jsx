@@ -179,20 +179,6 @@ const slideRightVariant = {
   },
 };
 
-const slideBottomVariant = {
-  init: { opacity: 0, y: 100 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.9, ease: "easeOut", staggerChildren: 0.2 },
-  },
-  out: {
-    opacity: 0,
-    y: 100,
-    transition: { duration: 0.4, ease: "easeIn", staggerChildren: 0.15 },
-  },
-};
-
 const Projects = () => {
   const ref = useRef(null);
   const amount = useResponsiveAmount();
