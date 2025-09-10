@@ -1,7 +1,7 @@
 import MobileNav from "../navigation/MobileNav.jsx";
 import DesktopNav from "../navigation/DesktopNav.jsx";
 
-const Header = () => {
+const Header = ({ onAboutClick, onStackClick, onProjectCLick }) => {
   return (
     <header className="flex items-center justify-between container relative !py-10 nav-open">
       <div className="flex items-center">
@@ -14,9 +14,13 @@ const Header = () => {
         </a>
       </div>
 
-      <MobileNav />
+      <MobileNav onAboutClick={onAboutClick} onStackClick={onStackClick} />
 
-      <DesktopNav />
+      <DesktopNav
+        onAboutClick={onAboutClick}
+        onStackClick={onStackClick}
+        onProjectCLick={onProjectCLick}
+      />
     </header>
   );
 };

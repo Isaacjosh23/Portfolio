@@ -1,5 +1,5 @@
 import { motion, useAnimationControls, useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 import Container from "../reuseable/Container";
 import Section from "../reuseable/Section";
 import Tag from "../reuseable/Tag";
@@ -21,12 +21,12 @@ const childVariants = {
   out: { opacity: 0, x: -90, transition: { duration: 0.4, ease: "easeIn" } },
 };
 
-const About = () => {
-  const ref = useRef(null);
+const About = forwardRef((_, externalRef) => {
+  const internalRef = useRef(null);
 
   const amount = useResponsiveAmount();
 
-  const inView = useInView(ref, { amount });
+  const inView = useInView(internalRef, { amount });
 
   const controls = useAnimationControls();
 
@@ -36,7 +36,14 @@ const About = () => {
   }, [inView, controls]);
 
   return (
-    <Section ref={ref} className="bg-[var(--color-grey-50)] py-20 lg:py-32">
+    <Section
+      ref={(el) => {
+        internalRef.current = el;
+
+        if (externalRef) externalRef.current = el;
+      }}
+      className="bg-[var(--color-grey-50)] py-20 lg:py-32"
+    >
       <Container
         variants={containerVariants}
         initial="init"
@@ -132,6 +139,6 @@ const About = () => {
       </Container>
     </Section>
   );
-};
+});
 
 export default About;

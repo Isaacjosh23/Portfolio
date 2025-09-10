@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const MobileNav = () => {
+const MobileNav = ({ onAboutClick, onStackClick }) => {
   const [navIsOpen, setNavIsOpen] = useState(false);
 
   const handleNavToggle = () => {
@@ -8,6 +8,12 @@ const MobileNav = () => {
   };
 
   const handleOverlay = () => {
+    setNavIsOpen(false);
+  };
+
+  const handleNavClick = (e, callback) => {
+    e.preventDefault();
+    callback();
     setNavIsOpen(false);
   };
 
@@ -23,8 +29,28 @@ const MobileNav = () => {
             </li>
 
             <li>
-              <a href="#" className="text-[1.5rem] font-bold nav-links">
+              <a
+                href="#"
+                onClick={(e) => handleNavClick(e, onAboutClick)}
+                className="text-[1.5rem] font-bold nav-links"
+              >
                 About
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="#"
+                className="text-[1.5rem] font-bold nav-links"
+                onClick={(e) => handleNavClick(e, onStackClick)}
+              >
+                Stack
+              </a>
+            </li>
+
+            <li>
+              <a href="#" className="text-[1.5rem] font-bold nav-links">
+                Experience
               </a>
             </li>
 

@@ -1,4 +1,9 @@
-const DesktopNav = () => {
+const DesktopNav = ({ onAboutClick, onStackClick, onProjectClick }) => {
+  const handleNavClick = (e, callback) => {
+    e.preventDefault();
+    callback();
+  };
+
   return (
     <>
       <nav className="hidden md:block">
@@ -16,6 +21,7 @@ const DesktopNav = () => {
             <a
               href="#"
               className="lg:text-[1.6rem] md:text-[1.4rem]  font-medium text-[var(--color-grey)] nav-links"
+              onClick={(e) => handleNavClick(e, onAboutClick)}
             >
               About
             </a>
@@ -25,6 +31,26 @@ const DesktopNav = () => {
             <a
               href="#"
               className="lg:text-[1.6rem] md:text-[1.4rem]  font-medium text-[var(--color-grey)] nav-links"
+              // onClick={(e) => handleNavClick(e, onStackClick)}
+            >
+              Stack
+            </a>
+          </li>
+
+          {/* <li>
+            <a
+              href="#"
+              className="lg:text-[1.6rem] md:text-[1.4rem]  font-medium text-[var(--color-grey)] nav-links"
+            >
+              Experience
+            </a>
+          </li> */}
+
+          <li>
+            <a
+              href="#"
+              className="lg:text-[1.6rem] md:text-[1.4rem]  font-medium text-[var(--color-grey)] nav-links"
+              onClick={(e) => handleNavClick(e, onProjectClick)}
             >
               Projects
             </a>

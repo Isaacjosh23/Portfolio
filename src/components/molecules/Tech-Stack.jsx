@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 import Container from "../reuseable/Container";
 import Section from "../reuseable/Section";
 import Tag from "../reuseable/Tag";
@@ -55,10 +55,10 @@ const skills = [
   },
 ];
 
-const TechStack = () => {
-  const ref = useRef(null);
+const TechStack = forwardRef((_, externalRef) => {
+  const internalRef = useRef(null);
   const amount = useResponsiveAmount();
-  const inView = useInView(ref, { amount });
+  const inView = useInView(internalRef, { amount });
   const controls = useAnimationControls();
 
   useEffect(() => {
@@ -68,7 +68,7 @@ const TechStack = () => {
 
   return (
     <Section
-      ref={ref}
+      ref={internalRef}
       initial="init"
       animate={controls}
       variants={slideRightVariant}
@@ -106,7 +106,7 @@ const TechStack = () => {
       </Container>
     </Section>
   );
-};
+});
 
 const Stack = ({ skill }) => {
   return (
