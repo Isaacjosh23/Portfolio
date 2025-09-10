@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const DesktopNav = ({
   onAboutClick,
   onExperienceClick,
@@ -5,6 +7,13 @@ const DesktopNav = ({
   onProjectClick,
   onHeroClick,
 }) => {
+  const [downloading, setDownloading] = useState(false);
+
+  const handleClick = () => {
+    setDownloading(true);
+    setTimeout(() => setDownloading(false), 2000); // reset after 2s
+  };
+
   const handleNavClick = (e, callback) => {
     e.preventDefault();
     callback();
@@ -68,11 +77,20 @@ const DesktopNav = ({
 
       <div className="md:flex md:items-center md:gap-10 hidden">
         <a
+          onClick={handleClick}
           href="../../../resume/resume.docx"
           download="Ebahmen_Joshua_Resume.docx"
-          className="p-4 bg-black text-white md:text-[1.4rem] lg:text-[1.6rem] hover:bg-[#333] smooth-trans hover-shadow custom-shadow rounded-3xl"
+          className={`p-4 bg-black text-white font-semibold md:text-[1.4rem] lg:text-[1.6rem] hover:bg-[#333] smooth-trans hover-shadow custom-shadow rounded-3xl flex items-center justify-center gap-2 min-w-[128px]  ${
+            downloading ? "opacity-70 pointer-events-none" : ""
+          }`}
         >
-          Download CV
+          {downloading ? (
+            <>
+              <span className="loader border-2 p-4 border-white border-t-transparent rounded-full w-4 h-4 animate-spin"></span>
+            </>
+          ) : (
+            "Download CV"
+          )}
         </a>
 
         <button className="flex items-center cursor-pointer p-2 rounded-[8px] custom-shadow">

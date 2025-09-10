@@ -23,10 +23,16 @@ const MobileNav = ({
     setNavIsOpen(false);
   };
 
+  const [downloading, setDownloading] = useState(false);
+
+  const handleClick = () => {
+    setDownloading(true);
+    setTimeout(() => setDownloading(false), 2000); // reset after 2s
+  };
   return (
     <>
       {navIsOpen && (
-        <nav className="main-nav absolute w-full h-screen invisible opacity-0 pointer-events-none z-[45] smooth-trans nav-position">
+        <nav className="main-nav md:hidden absolute w-full h-screen invisible opacity-0 pointer-events-none z-[45] smooth-trans nav-position">
           <ul className="flex flex-col bg-white items-center gap-10 h-screen">
             <li>
               <a
@@ -80,11 +86,21 @@ const MobileNav = ({
 
             <div className="flex flex-col justify-center items-center gap-10">
               <a
+                onClick={handleClick}
                 href="../../../resume/resume.docx"
                 download="Ebahmen_Joshua_Resume.docx"
-                className="p-4 bg-black text-white text-[1.3rem] font-bold rounded-3xl block hover:bg-[#333] smooth-trans hover-shadow custom-shadow"
+                className={`p-4 bg-black text-white text-[1.3rem] font-semibold md:text-[1.4rem] lg:text-[1.6rem] hover:bg-[#333] smooth-trans hover-shadow custom-shadow rounded-3xl flex items-center justify-center gap-2 min-w-[128px]  ${
+                  downloading ? "opacity-70 pointer-events-none" : ""
+                }`}
               >
-                Download CV
+                {downloading ? (
+                  <>
+                    <span className="loader border-2 p-3 border-white border-t-transparent rounded-full w-5 h-5 animate-spin"></span>
+                    {/* Downloading... */}
+                  </>
+                ) : (
+                  "Download CV"
+                )}
               </a>
 
               <button className="flex items-center gap-4 p-2 rounded-[8px] custom-shadow">
@@ -105,7 +121,7 @@ const MobileNav = ({
 
       {navIsOpen && (
         <div
-          className="absolute top-0 left-0 w-full h-screen bg-[rgba(0,0,0,0.6)] z-[40] backdrop-blur-[3px]"
+          className="absolute md:hidden top-0 left-0 w-full h-screen bg-[rgba(0,0,0,0.6)] z-[40] backdrop-blur-[3px]"
           onClick={handleOverlay}
         ></div>
       )}
