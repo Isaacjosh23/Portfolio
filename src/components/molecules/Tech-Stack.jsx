@@ -1,12 +1,12 @@
-import { forwardRef, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Container from "../reuseable/Container";
 import Section from "../reuseable/Section";
 import Tag from "../reuseable/Tag";
 import { motion, useAnimationControls, useInView } from "framer-motion";
 import useResponsiveAmount from "../hooks/useResponsiveAmount";
 
-const slideRightVariant = {
-  init: { opacity: 0, x: 100 },
+const slideLeftVariant = {
+  init: { opacity: 0, x: -100 },
   visible: {
     opacity: 1,
     x: 0,
@@ -15,7 +15,7 @@ const slideRightVariant = {
 
   out: {
     opacity: 0,
-    x: 100,
+    x: -100,
     transition: { duration: 0.4, ease: "easeIn", staggerChildren: 0.15 },
   },
 };
@@ -55,7 +55,7 @@ const skills = [
   },
 ];
 
-const TechStack = forwardRef((_, externalRef) => {
+const TechStack = () => {
   const internalRef = useRef(null);
   const amount = useResponsiveAmount();
   const inView = useInView(internalRef, { amount });
@@ -71,22 +71,22 @@ const TechStack = forwardRef((_, externalRef) => {
       ref={internalRef}
       initial="init"
       animate={controls}
-      variants={slideRightVariant}
+      variants={slideLeftVariant}
       className="py-20"
     >
       <Container
-        variants={slideRightVariant}
+        variants={slideLeftVariant}
         className="flex flex-col gap-12 md:gap-20 lg:gap-32"
       >
         <motion.div
-          variants={slideRightVariant}
+          variants={slideLeftVariant}
           className="flex flex-col items-center gap-4 md:gap-7 text-center"
         >
-          <Tag as={motion.div} variants={slideRightVariant}>
+          <Tag as={motion.div} variants={slideLeftVariant}>
             Tech Stack
           </Tag>
           <motion.p
-            variants={slideRightVariant}
+            variants={slideLeftVariant}
             className="text-xl md:text-[1.35rem] text-center"
           >
             Technologies I’ve been working with recently
@@ -96,7 +96,7 @@ const TechStack = forwardRef((_, externalRef) => {
         {/* Stack Images */}
 
         <motion.ul
-          variants={slideRightVariant}
+          variants={slideLeftVariant}
           className="grid grid-cols-4 gap-y-8 md:gap-y-16 items-center justify-center"
         >
           {skills.map((skill) => (
@@ -106,12 +106,12 @@ const TechStack = forwardRef((_, externalRef) => {
       </Container>
     </Section>
   );
-});
+};
 
 const Stack = ({ skill }) => {
   return (
     <motion.li
-      variants={slideRightVariant}
+      variants={slideLeftVariant}
       className="flex items-center justify-center"
     >
       <img src={skill.img} alt={skill.type} className="w-16 md:w-24" />

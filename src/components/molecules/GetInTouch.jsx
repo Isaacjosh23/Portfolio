@@ -1,12 +1,12 @@
-import { useEffect, useRef } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 import Container from "../reuseable/Container";
 import Section from "../reuseable/Section";
 import Tag from "../reuseable/Tag";
 import useResponsiveAmount from "../hooks/useResponsiveAmount";
 import { motion, useAnimationControls, useInView } from "framer-motion";
 
-const slideLeftVariant = {
-  init: { opacity: 0, x: 100 },
+const slideRightVarient = {
+  init: { opacity: 0, x: -100 },
   visible: {
     opacity: 1,
     x: 0,
@@ -15,15 +15,15 @@ const slideLeftVariant = {
 
   out: {
     opacity: 0,
-    x: 100,
+    x: -100,
     transition: { duration: 0.4, ease: "easeIn", staggerChildren: 0.15 },
   },
 };
 
-const GetInTouch = () => {
-  const ref = useRef(null);
+const GetInTouch = forwardRef((_, externalRef) => {
+  const internalRef = useRef(null);
   const amount = useResponsiveAmount();
-  const inView = useInView(ref, { amount });
+  const inView = useInView(internalRef, { amount });
   const controls = useAnimationControls();
 
   useEffect(() => {
@@ -33,26 +33,30 @@ const GetInTouch = () => {
 
   return (
     <Section
-      ref={ref}
+      ref={(el) => {
+        internalRef.current = el;
+
+        if (externalRef) externalRef.current = el;
+      }}
       initial="init"
       animate={controls}
-      variants={slideLeftVariant}
+      variants={slideRightVarient}
       className="py-20 lg:py-32 bg-[var(--color-grey-50)]"
     >
       <Container
-        variants={slideLeftVariant}
+        variants={slideRightVarient}
         className="flex flex-col items-center gap-6 md:gap-12"
       >
         <motion.div
-          variants={slideLeftVariant}
+          variants={slideRightVarient}
           className="flex flex-col justify-center items-center gap-6"
         >
-          <Tag as={motion.div} variants={slideLeftVariant}>
+          <Tag as={motion.div} variants={slideRightVarient}>
             Get in touch
           </Tag>
 
           <motion.p
-            variants={slideLeftVariant}
+            variants={slideRightVarient}
             className="text-xl md:text-[1.35rem] text-center"
           >
             What’s next? Feel free to reach out to me if you're looking for a
@@ -61,11 +65,11 @@ const GetInTouch = () => {
         </motion.div>
 
         <motion.div
-          variants={slideLeftVariant}
+          variants={slideRightVarient}
           className="flex flex-col justify-center items-center gap-8"
         >
           <motion.div
-            variants={slideLeftVariant}
+            variants={slideRightVarient}
             className="flex items-center gap-6"
           >
             <a
@@ -81,7 +85,7 @@ const GetInTouch = () => {
             ></ion-icon>
           </motion.div>
 
-          <motion.div variants={slideLeftVariant}>
+          <motion.div variants={slideRightVarient}>
             <a
               href="https://api.whatsapp.com/send?phone=2348132853469&text=Hi%20Joshua%2C%0A%0AMy%20name%20is%20"
               target="_blank"
@@ -97,7 +101,7 @@ const GetInTouch = () => {
           </motion.div>
 
           <motion.div
-            variants={slideLeftVariant}
+            variants={slideRightVarient}
             className="flex items-center gap-6"
           >
             <a
@@ -115,7 +119,7 @@ const GetInTouch = () => {
         </motion.div>
 
         <motion.div
-          variants={slideLeftVariant}
+          variants={slideRightVarient}
           className="flex flex-col items-center gap-6"
         >
           <p className="text-[1.1rem] md:text-[1.35rem] text-center">
@@ -169,6 +173,6 @@ const GetInTouch = () => {
       </Container>
     </Section>
   );
-};
+});
 
 export default GetInTouch;

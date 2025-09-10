@@ -1,6 +1,11 @@
 import { useState } from "react";
 
-const MobileNav = ({ onAboutClick, onStackClick }) => {
+const MobileNav = ({
+  onAboutClick,
+  onExperienceClick,
+  onContactClick,
+  onProjectClick,
+}) => {
   const [navIsOpen, setNavIsOpen] = useState(false);
 
   const handleNavToggle = () => {
@@ -42,26 +47,28 @@ const MobileNav = ({ onAboutClick, onStackClick }) => {
               <a
                 href="#"
                 className="text-[1.5rem] font-bold nav-links"
-                onClick={(e) => handleNavClick(e, onStackClick)}
+                onClick={(e) => handleNavClick(e, onExperienceClick)}
               >
-                Stack
-              </a>
-            </li>
-
-            <li>
-              <a href="#" className="text-[1.5rem] font-bold nav-links">
                 Experience
               </a>
             </li>
 
             <li>
-              <a href="#" className="text-[1.5rem] font-bold nav-links">
+              <a
+                href="#"
+                className="text-[1.5rem] font-bold nav-links"
+                onClick={(e) => handleNavClick(e, onProjectClick)}
+              >
                 Projects
               </a>
             </li>
 
             <li>
-              <a href="#" className="text-[1.5rem] font-bold nav-links">
+              <a
+                href="#"
+                className="text-[1.5rem] font-bold nav-links"
+                onClick={(e) => handleNavClick(e, onContactClick)}
+              >
                 Contact
               </a>
             </li>

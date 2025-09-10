@@ -11,7 +11,8 @@ import { useRef } from "react";
 
 const Portfoilo = () => {
   const aboutRef = useRef(null);
-  const stackRef = useRef(null);
+  const experienceRef = useRef(null);
+  const contactRef = useRef(null);
   const projectRef = useRef(null);
 
   const scrollToSection = (ref) => {
@@ -22,8 +23,9 @@ const Portfoilo = () => {
     <>
       <Header
         onAboutClick={() => scrollToSection(aboutRef)}
-        onStackClick={() => scrollToSection(stackRef)}
+        onExperienceClick={() => scrollToSection(experienceRef)}
         onProjectClick={() => scrollToSection(projectRef)}
+        onContactClick={() => scrollToSection(contactRef)}
       />
 
       <Main>
@@ -34,16 +36,16 @@ const Portfoilo = () => {
         <About ref={aboutRef} />
 
         {/* Tech Stack Section */}
-        <TechStack ref={stackRef} />
+        <TechStack />
 
         {/* Experience Section */}
-        <Experience />
+        <Experience ref={experienceRef} />
 
         {/* Project Section */}
         <Projects ref={projectRef} />
 
         {/* Get In Touch */}
-        <GetInTouch />
+        <GetInTouch ref={contactRef} />
 
         {/* Footer Section */}
         <Footer />

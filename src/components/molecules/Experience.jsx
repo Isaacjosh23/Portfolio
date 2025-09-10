@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 import Container from "../reuseable/Container";
 import Section from "../reuseable/Section";
 import Tag from "../reuseable/Tag";
@@ -57,10 +57,10 @@ const slideBottomVariant = {
   },
 };
 
-const Experience = () => {
-  const ref = useRef(null);
+const Experience = forwardRef((_, externalRef) => {
+  const internalRef = useRef(null);
   const amount = useResponsiveAmount();
-  const inView = useInView(ref, { amount });
+  const inView = useInView(internalRef, { amount });
   const controls = useAnimationControls();
 
   useEffect(() => {
@@ -70,7 +70,11 @@ const Experience = () => {
 
   return (
     <Section
-      ref={ref}
+      ref={(el) => {
+        internalRef.current = el;
+
+        if (externalRef) externalRef.current = el;
+      }}
       initial="init"
       animate={controls}
       variants={slideLeftVariant}
@@ -111,7 +115,7 @@ const Experience = () => {
       </Container>
     </Section>
   );
-};
+});
 
 const ExperienceCard = ({ work, workTask }) => {
   return (

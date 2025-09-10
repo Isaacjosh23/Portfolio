@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import Container from "../reuseable/Container";
 import Section from "../reuseable/Section";
 import Tag from "../reuseable/Tag";
@@ -165,8 +165,8 @@ const projectObject = [
   },
 ];
 
-const slideRightVariant = {
-  init: { opacity: 0, x: 100 },
+const slideLeftVariant = {
+  init: { opacity: 0, x: -100 },
   visible: {
     opacity: 1,
     x: 0,
@@ -174,15 +174,15 @@ const slideRightVariant = {
   },
   out: {
     opacity: 0,
-    x: 100,
+    x: -100,
     transition: { duration: 0.4, ease: "easeIn", staggerChildren: 0.15 },
   },
 };
 
-const Projects = () => {
-  const ref = useRef(null);
+const Projects = forwardRef((_, externalRef) => {
+  const internalRef = useRef(null);
   const amount = useResponsiveAmount();
-  const inView = useInView(ref, { amount });
+  const inView = useInView(internalRef, { amount });
   const controls = useAnimationControls();
 
   // Responsive Projects per page
@@ -215,25 +215,29 @@ const Projects = () => {
 
   return (
     <Section
-      ref={ref}
+      ref={(el) => {
+        internalRef.current = el;
+
+        if (externalRef) externalRef.current = el;
+      }}
       initial="init"
       animate={controls}
-      variants={slideRightVariant}
+      variants={slideLeftVariant}
       className="py-20 lg:py-32"
     >
       <Container
-        variants={slideRightVariant}
+        variants={slideLeftVariant}
         className="flex flex-col gap-12 md:gap-20 lg:gap-32"
       >
         <motion.div
-          variants={slideRightVariant}
+          variants={slideLeftVariant}
           className="flex flex-col gap-4 md:gap-7 items-center text-center"
         >
-          <Tag as={motion.div} variants={slideRightVariant}>
+          <Tag as={motion.div} variants={slideLeftVariant}>
             Projects
           </Tag>
           <motion.p
-            variants={slideRightVariant}
+            variants={slideLeftVariant}
             className="text-xl md:text-[1.35rem] text-center"
           >
             Things I’ve built so far
@@ -261,7 +265,7 @@ const Projects = () => {
             <button
               key={index + 1}
               onClick={() => setCurrentPage(index + 1)}
-              className={`px-4 py-2 rounded-full border ${
+              className={`px-4 py-2 rounded-full border cursor-pointer ${
                 currentPage === index + 1
                   ? "bg-black text-white"
                   : "bg-white text-black"
@@ -274,18 +278,11 @@ const Projects = () => {
       </Container>
     </Section>
   );
-};
+});
 
 const Project = ({ project }) => {
   return (
-    <motion.li
-      // variants={slideBottomVariant}
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -30 }}
-      transition={{ duration: 0.5, ease: "easeInOut" }}
-      className="rounded-2xl bg-white custom-shadow w-[28rem] md:justify-self-center"
-    >
+    <motion.li className="rounded-2xl bg-white custom-shadow w-[28rem] md:justify-self-center">
       <div className="rounded-t-2xl overflow-hidden">
         <img
           src={project.image}

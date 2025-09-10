@@ -1,4 +1,9 @@
-const DesktopNav = ({ onAboutClick, onStackClick, onProjectClick }) => {
+const DesktopNav = ({
+  onAboutClick,
+  onExperienceClick,
+  onContactClick,
+  onProjectClick,
+}) => {
   const handleNavClick = (e, callback) => {
     e.preventDefault();
     callback();
@@ -27,24 +32,25 @@ const DesktopNav = ({ onAboutClick, onStackClick, onProjectClick }) => {
             </a>
           </li>
 
-          <li>
-            <a
-              href="#"
-              className="lg:text-[1.6rem] md:text-[1.4rem]  font-medium text-[var(--color-grey)] nav-links"
-              // onClick={(e) => handleNavClick(e, onStackClick)}
-            >
-              Stack
-            </a>
-          </li>
-
           {/* <li>
             <a
               href="#"
               className="lg:text-[1.6rem] md:text-[1.4rem]  font-medium text-[var(--color-grey)] nav-links"
+              onClick={(e) => handleNavClick(e, onStackClick)}
+            >
+              Stack
+            </a>
+          </li> */}
+
+          <li>
+            <a
+              href="#"
+              className="lg:text-[1.6rem] md:text-[1.4rem]  font-medium text-[var(--color-grey)] nav-links"
+              onClick={(e) => handleNavClick(e, onExperienceClick)}
             >
               Experience
             </a>
-          </li> */}
+          </li>
 
           <li>
             <a
@@ -60,6 +66,7 @@ const DesktopNav = ({ onAboutClick, onStackClick, onProjectClick }) => {
             <a
               href="#"
               className="lg:text-[1.6rem] md:text-[1.4rem]  font-medium text-[var(--color-grey)] nav-links"
+              onClick={(e) => handleNavClick(e, onContactClick)}
             >
               Contact
             </a>
