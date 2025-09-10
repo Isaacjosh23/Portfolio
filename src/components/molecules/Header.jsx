@@ -6,34 +6,38 @@ const Header = ({
   onProjectClick,
   onExperienceClick,
   onContactClick,
+  onHeroClick,
 }) => {
   return (
-    <header className="flex items-center justify-between container relative !py-10 nav-open">
-      <div className="flex items-center">
-        <a href="#">
-          <img
-            src="../images/name-logo.png"
-            alt="Joshua"
-            className="w-24 lg:w-28"
-          />
-        </a>
+    <header className="fixed bg-white w-full z-[999] nav-open">
+      <div className="flex items-center justify-between container h-32">
+        <div className="flex items-center">
+          <a href="#">
+            <img
+              src="../images/name-logo.png"
+              alt="Joshua"
+              className="w-24 lg:w-28"
+            />
+          </a>
+        </div>
+
+        <MobileNav
+          onAboutClick={onAboutClick}
+          onExperienceClick={onExperienceClick}
+          onContactClick={onContactClick}
+          onProjectClick={onProjectClick}
+          onHeroClick={onHeroClick}
+        />
+
+        <DesktopNav
+          onAboutClick={onAboutClick}
+          onExperienceClick={onExperienceClick}
+          onContactClick={onContactClick}
+          onProjectClick={onProjectClick}
+          onHeroClick={onHeroClick}
+        />
       </div>
-
-      <MobileNav
-        onAboutClick={onAboutClick}
-        onExperienceClick={onExperienceClick}
-        onContactClick={onContactClick}
-        onProjectClick={onProjectClick}
-      />
-
-      <DesktopNav
-        onAboutClick={onAboutClick}
-        onExperienceClick={onExperienceClick}
-        onContactClick={onContactClick}
-        onProjectClick={onProjectClick}
-      />
     </header>
   );
 };
-
 export default Header;

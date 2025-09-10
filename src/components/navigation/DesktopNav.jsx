@@ -3,6 +3,7 @@ const DesktopNav = ({
   onExperienceClick,
   onContactClick,
   onProjectClick,
+  onHeroClick,
 }) => {
   const handleNavClick = (e, callback) => {
     e.preventDefault();
@@ -17,6 +18,7 @@ const DesktopNav = ({
             <a
               href="#"
               className="lg:text-[1.6rem] md:text-[1.4rem]  font-medium text-[var(--color-grey)] nav-links"
+              onClick={(e) => handleNavClick(e, onHeroClick)}
             >
               Home
             </a>
@@ -31,16 +33,6 @@ const DesktopNav = ({
               About
             </a>
           </li>
-
-          {/* <li>
-            <a
-              href="#"
-              className="lg:text-[1.6rem] md:text-[1.4rem]  font-medium text-[var(--color-grey)] nav-links"
-              onClick={(e) => handleNavClick(e, onStackClick)}
-            >
-              Stack
-            </a>
-          </li> */}
 
           <li>
             <a
@@ -76,7 +68,8 @@ const DesktopNav = ({
 
       <div className="md:flex md:items-center md:gap-10 hidden">
         <a
-          href="#"
+          href="../../../resume/resume.docx"
+          download="Ebahmen_Joshua_Resume.docx"
           className="p-4 bg-black text-white md:text-[1.4rem] lg:text-[1.6rem] hover:bg-[#333] smooth-trans hover-shadow custom-shadow rounded-3xl"
         >
           Download CV

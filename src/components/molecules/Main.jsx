@@ -1,6 +1,6 @@
 const Main = ({ children, className = "", ...props }) => {
   return (
-    <main className={`${className}`} {...props}>
+    <main className={`${className} pt-32`} {...props}>
       {children}
     </main>
   );

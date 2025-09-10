@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import Container from "../reuseable/Container";
 import Section from "../reuseable/Section";
 import Tag from "../reuseable/Tag";
@@ -21,6 +21,16 @@ const slideRightVarient = {
 };
 
 const GetInTouch = forwardRef((_, externalRef) => {
+  const [copied, setCopied] = useState(null);
+
+  const handleCopy = (text, type) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(type);
+
+      setTimeout(() => setCopied(null), 2000);
+    });
+  };
+
   const internalRef = useRef(null);
   const amount = useResponsiveAmount();
   const inView = useInView(internalRef, { amount });
@@ -79,13 +89,27 @@ const GetInTouch = forwardRef((_, externalRef) => {
               <ion-icon name="mail-outline" className="w-7 h-7"></ion-icon>
               <span>ebhamenjoshua@gmail.com</span>
             </a>
-            <ion-icon
-              name="copy-outline"
-              className="w-7 h-7 cursor-pointer"
-            ></ion-icon>
+            <button
+              className="flex items-center gap-3"
+              onClick={() => handleCopy("ebhamenjoshua@gmail.com", "email")}
+            >
+              <ion-icon
+                name="copy-outline"
+                className="w-7 h-7 cursor-pointer"
+              ></ion-icon>
+
+              {copied === "email" && (
+                <span className="text-[0.8rem] md:text-xl text-green-600">
+                  Copied!
+                </span>
+              )}
+            </button>
           </motion.div>
 
-          <motion.div variants={slideRightVarient}>
+          <motion.div
+            className="flex items-center gap-6"
+            variants={slideRightVarient}
+          >
             <a
               href="https://api.whatsapp.com/send?phone=2348132853469&text=Hi%20Joshua%2C%0A%0AMy%20name%20is%20"
               target="_blank"
@@ -93,11 +117,22 @@ const GetInTouch = forwardRef((_, externalRef) => {
             >
               <ion-icon name="logo-whatsapp" className="w-7 h-7"></ion-icon>
               <span>08132853469</span>
+            </a>
+            <button
+              className="flex items-center gap-3"
+              onClick={() => handleCopy("08132853469", "number")}
+            >
               <ion-icon
                 name="copy-outline"
                 className="w-7 h-7 cursor-pointer"
               ></ion-icon>
-            </a>
+
+              {copied === "number" && (
+                <span className="text-[0.8rem] md:text-xl text-green-600">
+                  Copied!
+                </span>
+              )}
+            </button>
           </motion.div>
 
           <motion.div
@@ -111,10 +146,21 @@ const GetInTouch = forwardRef((_, externalRef) => {
               <ion-icon name="call-outline" className="w-7 h-7"></ion-icon>
               <span>+234 8140458966</span>
             </a>
-            <ion-icon
-              name="copy-outline"
-              className="w-7 h-7 cursor-pointer"
-            ></ion-icon>
+            <button
+              className="flex items-center gap-3"
+              onClick={() => handleCopy("08140458966", "call")}
+            >
+              <ion-icon
+                name="copy-outline"
+                className="w-7 h-7 cursor-pointer"
+              ></ion-icon>
+
+              {copied === "call" && (
+                <span className="text-[0.8rem] md:text-xl text-green-600">
+                  Copied!
+                </span>
+              )}
+            </button>
           </motion.div>
         </motion.div>
 

@@ -14,23 +14,33 @@ const Portfoilo = () => {
   const experienceRef = useRef(null);
   const contactRef = useRef(null);
   const projectRef = useRef(null);
+  const heroRef = useRef(null);
 
-  const scrollToSection = (ref) => {
-    ref.current?.scrollIntoView({ behavior: "smooth" });
+  const scrollToSection = (ref, offset = 0) => {
+    if (ref.current) {
+      const y =
+        ref.current.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
   };
 
   return (
     <>
       <Header
-        onAboutClick={() => scrollToSection(aboutRef)}
-        onExperienceClick={() => scrollToSection(experienceRef)}
-        onProjectClick={() => scrollToSection(projectRef)}
-        onContactClick={() => scrollToSection(contactRef)}
+        onHeroClick={() => scrollToSection(heroRef, 128)}
+        onAboutClick={() => scrollToSection(aboutRef, 100)}
+        onExperienceClick={() => scrollToSection(experienceRef, 100)}
+        onProjectClick={() => scrollToSection(projectRef, 100)}
+        onContactClick={() => scrollToSection(contactRef, 100)}
       />
 
       <Main>
         {/* Hero Section */}
-        <Hero />
+        <Hero
+          onProjectClick={() => scrollToSection(projectRef, 100)}
+          onContactClick={() => scrollToSection(contactRef, 100)}
+          ref={heroRef}
+        />
 
         {/* About Section */}
         <About ref={aboutRef} />

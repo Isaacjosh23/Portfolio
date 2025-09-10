@@ -5,6 +5,7 @@ const MobileNav = ({
   onExperienceClick,
   onContactClick,
   onProjectClick,
+  onHeroClick,
 }) => {
   const [navIsOpen, setNavIsOpen] = useState(false);
 
@@ -28,7 +29,11 @@ const MobileNav = ({
         <nav className="main-nav absolute w-full h-screen invisible opacity-0 pointer-events-none z-[45] smooth-trans nav-position">
           <ul className="flex flex-col bg-white items-center gap-10 h-screen">
             <li>
-              <a href="#" className="text-[1.5rem] font-bold nav-links">
+              <a
+                href="#"
+                className="text-[1.5rem] font-bold nav-links"
+                onClick={(e) => handleNavClick(e, onHeroClick)}
+              >
                 Home
               </a>
             </li>
@@ -75,7 +80,8 @@ const MobileNav = ({
 
             <div className="flex flex-col justify-center items-center gap-10">
               <a
-                href="#"
+                href="../../../resume/resume.docx"
+                download="Ebahmen_Joshua_Resume.docx"
                 className="p-4 bg-black text-white text-[1.3rem] font-bold rounded-3xl block hover:bg-[#333] smooth-trans hover-shadow custom-shadow"
               >
                 Download CV

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Section from "../reuseable/Section.jsx";
 import Container from "../reuseable/Container";
 import Button from "../reuseable/Button.jsx";
+import { forwardRef } from "react";
 
 const containerVarients = {
   hidden: { opacity: 0, y: 50 },
@@ -22,9 +23,12 @@ const childVarients = {
   visible: { opacity: 1, y: 0 },
 };
 
-const Hero = () => {
+const Hero = forwardRef(({ onContactClick, onProjectClick }, externalRef) => {
   return (
     <Section
+      ref={(el) => {
+        if (externalRef) externalRef.current = el;
+      }}
       variants={containerVarients}
       initial="hidden"
       whileInView="visible"
@@ -82,11 +86,17 @@ const Hero = () => {
               variants={childVarients}
               className="flex items-center justify-center md:justify-start gap-6"
             >
-              <Button className="text-[1.3rem] custom-shadow bg-black text-white hover-shadow">
+              <Button
+                onClick={onContactClick}
+                className="text-[1.3rem] custom-shadow bg-black text-white hover-shadow"
+              >
                 Contact
               </Button>
 
-              <Button className="text-[1.3rem] custom-shadow text-black hover-shadow">
+              <Button
+                onClick={onProjectClick}
+                className="text-[1.3rem] custom-shadow text-black hover-shadow"
+              >
                 Projects
               </Button>
             </motion.div>
@@ -148,6 +158,6 @@ const Hero = () => {
       </Container>
     </Section>
   );
-};
+});
 
 export default Hero;
