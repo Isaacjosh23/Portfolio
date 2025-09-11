@@ -109,3 +109,7 @@ body {
   background-clip: text; /* for Firefox */
   color: transparent;
 }
+
+.project-imgs {
+  height: 100%;
+}

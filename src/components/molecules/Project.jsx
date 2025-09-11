@@ -29,6 +29,40 @@ const projectObject = [
   },
 
   {
+    id: 1,
+
+    image: "../../images/project-img/SSB.png",
+
+    Title: "Surgery Status Board",
+
+    Description:
+      "A real-time surgery status board that tracks operating rooms, monitors procedure progress, and delivers live updates—helping hospitals improve coordination, communication.",
+
+    Stack: "React, React Router, TailwindCSS, CSS, Vite",
+
+    Weblink: "https://surgery-status-board.netlify.app/",
+
+    GitHubLink: "https://github.com/chingu-voyages/V56-tier1-team-02.git",
+  },
+
+  {
+    id: 1,
+
+    image: "../../images/project-img/Logoipsum.png",
+
+    Title: "Logoipsum",
+
+    Description:
+      "A single-page furniture shopping app where you can browse, shop, and get home décor delivered to your door. Fully responsive, built with React + Vite, Tailwind and CSS.",
+
+    Stack: "React, TailwindCSS, CSS, Vite",
+
+    Weblink: "https://logoipsumfurniture.netlify.app/",
+
+    GitHubLink: "https://github.com/Isaacjosh23/Logoipsum-Furniture.git",
+  },
+
+  {
     id: 2,
 
     image: "../../images/project-img/omnifood.png",
@@ -53,7 +87,7 @@ const projectObject = [
     Title: "iGeekMart",
 
     Description:
-      "This is a custom merchandise service that curates, designs, and ships branded merch—perfect for events, employees, or fans based on choice.",
+      "This is a custom merchandise service that curates, designs, and ships branded merch—perfect for events, employees, or fans based on choice or preference.",
 
     Stack: "HTML, JavaScript, CSS, TailwindCSS",
 
@@ -70,7 +104,7 @@ const projectObject = [
     Title: "African Touch",
 
     Description:
-      "An authentic African fashion brand blending heritage craftsmanship with modern style—each artisanal piece tells a story.",
+      "This is an authentic African fashion brand blending heritage craftsmanship with modern style—each artisanal piece tells a story of centuries.",
 
     Stack: "HTML, JavaScript, CSS, TailwindCSS",
 
@@ -104,7 +138,7 @@ const projectObject = [
     Title: "Tip Calculator",
 
     Description:
-      "This is a simple calculator to compute the tip and split the bill—ideal for dining with friends or group payments.",
+      "This is a simple calculator to compute the tip and split the bill—ideal for dining with families, friends or group payments.",
 
     Stack: "React, TailwindCSS, CSS, Vite",
 
@@ -121,7 +155,7 @@ const projectObject = [
     Title: "Price Component",
 
     Description:
-      "Possibly a pricing card or comparison UI component—displaying service tiers or product plans in card layouts.",
+      "Possibly a pricing card or comparison UI component—displaying service tiers or product plans of a company in card layouts.",
 
     Stack: "React, TailwindCSS, CSS, Vite",
 
@@ -187,13 +221,13 @@ const Projects = forwardRef((_, externalRef) => {
 
   // Responsive Projects per page
   const [currentPage, setCurrentPage] = useState(1);
-  const [projectsPerPage, setProjectsPerPage] = useState(3);
+  const [projectsPerPage, setProjectsPerPage] = useState(4);
 
   useEffect(() => {
     const updateProjectsPerPage = () => {
       if (window.innerWidth >= 1024) setProjectsPerPage(6);
       else if (window.innerWidth >= 768) setProjectsPerPage(4);
-      else setProjectsPerPage(3);
+      else setProjectsPerPage(4);
     };
 
     updateProjectsPerPage();
@@ -254,8 +288,8 @@ const Projects = forwardRef((_, externalRef) => {
             // variants={slideBottomVariant}
             className="flex flex-col justify-center items-center gap-24 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-0 md:gap-y-16"
           >
-            {currentProjects.map((project) => (
-              <Project key={project.id} project={project} />
+            {currentProjects.map((project, i) => (
+              <Project key={project.Title} project={project} i={i} />
             ))}
           </motion.ul>
         </AnimatePresence>
@@ -280,14 +314,16 @@ const Projects = forwardRef((_, externalRef) => {
   );
 });
 
-const Project = ({ project }) => {
+const Project = ({ project, i }) => {
   return (
-    <motion.li className="rounded-2xl bg-white custom-shadow w-[28rem] md:justify-self-center">
-      <div className="rounded-t-2xl overflow-hidden">
+    <motion.li className="rounded-2xl bg-white custom-shadow w-[29rem] md:justify-self-center">
+      <div className="rounded-t-2xl overflow-hidden w-[29rem] h-[22rem]">
         <img
           src={project.image}
           alt={project.Title}
-          className="inline-block min-w-full"
+          className={`inline-block w-full ${i === 2 ? "project-imgs" : ""} ${
+            i === 3 ? "project-imgs" : ""
+          } ${i === 1 ? "project-imgs" : ""} ${i === 4 ? "project-imgs" : ""}`}
         />
       </div>
 
@@ -297,7 +333,7 @@ const Project = ({ project }) => {
             {project.Title}
           </h3>
 
-          <p className="text-[1.2rem] lg:text-[1.3rem]">
+          <p className={`text-[1.2rem] lg:text-[1.3rem]`}>
             {project.Description}
           </p>
         </div>

@@ -12,7 +12,7 @@ const Header = ({
     <header className="fixed bg-white w-full z-[999] nav-open">
       <div className="flex items-center justify-between container h-32">
         <div className="flex items-center">
-          <a href="#">
+          <a href="#" onClick={() => window.location.reload()}>
             <img
               src="../images/name-logo.png"
               alt="Joshua"
