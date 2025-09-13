@@ -15,6 +15,14 @@
   --color-grey-900: #111827;
 }
 
+.dark {
+  color: #d1d5db;
+}
+
+.dark * {
+  color: #d1d5db;
+}
+
 html {
   font-size: 62.5%;
   overflow-x: hidden;

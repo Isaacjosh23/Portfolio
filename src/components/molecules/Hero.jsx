@@ -2,7 +2,8 @@ import { motion } from "framer-motion";
 import Section from "../reuseable/Section.jsx";
 import Container from "../reuseable/Container";
 import Button from "../reuseable/Button.jsx";
-import { forwardRef } from "react";
+import { forwardRef, useContext } from "react";
+import { ThemeContext } from "../Portfoilo.jsx";
 
 const containerVarients = {
   hidden: { opacity: 0, y: 50 },
@@ -24,23 +25,31 @@ const childVarients = {
 };
 
 const Hero = forwardRef(({ onContactClick, onProjectClick }, externalRef) => {
+  const { theme } = useContext(ThemeContext);
+
   return (
     <Section
       ref={(el) => {
         if (externalRef) externalRef.current = el;
       }}
-      variants={containerVarients}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      className="py-20"
+      className={`py-20 ${theme === "dark" ? "bg-[#030712]" : ""}`}
     >
-      <Container className="flex flex-col justify-center  items-center gap-11 md:gap-16 md:grid md:grid-cols-2">
+      <Container
+        variants={containerVarients}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="flex flex-col justify-center  items-center gap-11 md:gap-16 md:grid md:grid-cols-2"
+      >
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-6">
             <motion.h1
               variants={childVarients}
-              className="text-4xl font-bold text-[var(--color-solid)] text-center leading-[3.5rem] md:text-start md:leading-[4rem] md:text-5xl"
+              className={`text-4xl font-bold  ${
+                theme === "dark"
+                  ? "text-[#D9D9D9]"
+                  : "text-[var(--color-solid)]"
+              } text-center leading-[3.5rem] md:text-start md:leading-[4rem] md:text-5xl`}
             >
               Hi 👋, <br className="hidden md:block" /> My name is
               <br className="hidden md:block" />
@@ -49,7 +58,9 @@ const Hero = forwardRef(({ onContactClick, onProjectClick }, externalRef) => {
 
             <motion.p
               variants={childVarients}
-              className="text-center text-xl lg:text-[1.4rem] text-[var(--color-solid)] md:text-start"
+              className={`text-center text-xl lg:text-[1.4rem] md:text-start leading-[2rem] md:leading-[2.4rem] ${
+                theme === "dark" ? "text-white" : "text-[var(--color-solid)]"
+              }`}
             >
               As a frontend developer, I specialize on producing outstanding
               digital experiences that are responsive, quick, easy to use, and
@@ -62,7 +73,13 @@ const Hero = forwardRef(({ onContactClick, onProjectClick }, externalRef) => {
               variants={childVarients}
               className="flex items-center justify-center md:justify-start gap-4"
             >
-              <p className="flex items-center gap-2 font-medium lg:text-xl">
+              <p
+                className={`flex items-center gap-2 font-medium lg:text-xl ${
+                  theme === "dark"
+                    ? "text-gray-300"
+                    : "text-[var(--color-solid)]"
+                }`}
+              >
                 <ion-icon
                   name="location-outline"
                   className="w-6 h-6"
@@ -71,10 +88,16 @@ const Hero = forwardRef(({ onContactClick, onProjectClick }, externalRef) => {
                 <span>Lagos, Nigeria</span>
               </p>
 
-              <p className="flex items-center gap-2 font-medium lg:text-xl">
+              <p
+                className={`flex items-center gap-2 font-medium lg:text-xl ${
+                  theme === "dark"
+                    ? "text-gray-300"
+                    : "text-[var(--color-solid)]"
+                }`}
+              >
                 <ion-icon
                   name="ellipse"
-                  className="w-6 h-6 text-green-600"
+                  className="w-6 h-6 text-green-600!"
                 ></ion-icon>
                 <span>Available for new projects</span>
               </p>
@@ -88,14 +111,20 @@ const Hero = forwardRef(({ onContactClick, onProjectClick }, externalRef) => {
             >
               <Button
                 onClick={onContactClick}
-                className="text-[1.3rem] custom-shadow bg-black text-white hover-shadow"
+                className={`text-[1.3rem] custom-shadow   hover-shadow ${
+                  theme === "dark"
+                    ? "bg-[#F9FAFB] text-[#111827]!"
+                    : "bg-black text-white"
+                }`}
               >
                 Contact
               </Button>
 
               <Button
                 onClick={onProjectClick}
-                className="text-[1.3rem] custom-shadow text-black hover-shadow"
+                className={`text-[1.3rem] custom-shadow hover-shadow ${
+                  theme === "dark" ? "text-white" : "text-black"
+                }`}
               >
                 Projects
               </Button>
@@ -107,7 +136,11 @@ const Hero = forwardRef(({ onContactClick, onProjectClick }, externalRef) => {
                 <a
                   href="https://github.com/Isaacjosh23"
                   target="_blank"
-                  className="text-[var(--color-grey)] hover:text-black smooth-trans p-2.5"
+                  className={`hover:text-black smooth-trans p-2.5 ${
+                    theme === "dark"
+                      ? "text-[#F9FAFB]! hover:text-white!"
+                      : "text-[var(--color-grey)]"
+                  }`}
                 >
                   <ion-icon
                     name="logo-github"
@@ -121,7 +154,11 @@ const Hero = forwardRef(({ onContactClick, onProjectClick }, externalRef) => {
                 <a
                   href="https://x.com/codes_from_josh?t=0p-3oxHXbpKMiF47B1XEIg&s=09"
                   target="_blank"
-                  className="text-[var(--color-grey)] hover:text-black smooth-trans p-2.5"
+                  className={`hover:text-black smooth-trans p-2.5 ${
+                    theme === "dark"
+                      ? "text-[#F9FAFB]! hover:text-white!"
+                      : "text-[var(--color-grey)]"
+                  }`}
                 >
                   <ion-icon
                     name="logo-twitter"
@@ -135,7 +172,11 @@ const Hero = forwardRef(({ onContactClick, onProjectClick }, externalRef) => {
                 <a
                   href="https://www.linkedin.com/in/joshua-ebhamen-4904aa344/"
                   target="_blank"
-                  className="text-[var(--color-grey)] hover:text-black smooth-trans p-2.5"
+                  className={`hover:text-black smooth-trans p-2.5 ${
+                    theme === "dark"
+                      ? "text-[#F9FAFB]! hover:text-white!"
+                      : "text-[var(--color-grey)]"
+                  }`}
                 >
                   <ion-icon
                     name="logo-linkedin"

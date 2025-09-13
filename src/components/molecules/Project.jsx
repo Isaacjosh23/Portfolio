@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useContext, useEffect, useRef, useState } from "react";
 import Container from "../reuseable/Container";
 import Section from "../reuseable/Section";
 import Tag from "../reuseable/Tag";
@@ -9,6 +9,7 @@ import {
   useInView,
 } from "framer-motion";
 import useResponsiveAmount from "../hooks/useResponsiveAmount";
+import { ThemeContext } from "../Portfoilo";
 
 const projectObject = [
   {
@@ -218,6 +219,7 @@ const Projects = forwardRef((_, externalRef) => {
   const amount = useResponsiveAmount();
   const inView = useInView(internalRef, { amount });
   const controls = useAnimationControls();
+  const { theme } = useContext(ThemeContext);
 
   // Responsive Projects per page
   const [currentPage, setCurrentPage] = useState(1);
@@ -254,12 +256,11 @@ const Projects = forwardRef((_, externalRef) => {
 
         if (externalRef) externalRef.current = el;
       }}
-      initial="init"
-      animate={controls}
-      variants={slideLeftVariant}
-      className="py-20 lg:py-32"
+      className={`${theme === "dark" ? "bg-[#030712]" : ""} py-20 lg:py-32`}
     >
       <Container
+        initial="init"
+        animate={controls}
         variants={slideLeftVariant}
         className="flex flex-col gap-12 md:gap-20 lg:gap-32"
       >
@@ -289,7 +290,12 @@ const Projects = forwardRef((_, externalRef) => {
             className="flex flex-col justify-center items-center gap-24 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-0 md:gap-y-16"
           >
             {currentProjects.map((project, i) => (
-              <Project key={project.Title} project={project} i={i} />
+              <Project
+                key={project.Title}
+                project={project}
+                i={i}
+                theme={theme}
+              />
             ))}
           </motion.ul>
         </AnimatePresence>
@@ -299,10 +305,14 @@ const Projects = forwardRef((_, externalRef) => {
             <button
               key={index + 1}
               onClick={() => setCurrentPage(index + 1)}
-              className={`px-4 py-2 rounded-full border cursor-pointer ${
-                currentPage === index + 1
-                  ? "bg-black text-white"
-                  : "bg-white text-black"
+              className={`w-10 h-10 rounded-full border cursor-pointer smooth-trans ${
+                theme === "light"
+                  ? currentPage === index + 1
+                    ? "bg-black text-white border-black"
+                    : "bg-white border-black text-black"
+                  : currentPage === index + 1
+                  ? "bg-white text-black! border-white"
+                  : "bg-[#030712] border-white text-white"
               }`}
             >
               {index + 1}
@@ -314,9 +324,13 @@ const Projects = forwardRef((_, externalRef) => {
   );
 });
 
-const Project = ({ project, i }) => {
+const Project = ({ project, i, theme }) => {
   return (
-    <motion.li className="rounded-2xl bg-white custom-shadow w-[29rem] md:justify-self-center">
+    <motion.li
+      className={`${
+        theme === "dark" ? "bg-[#1F2937]" : "bg-white custom-shadow"
+      } rounded-2xl w-[29rem] md:justify-self-center`}
+    >
       <div className="rounded-t-2xl overflow-hidden w-[29rem] h-[22rem]">
         <img
           src={project.image}
@@ -329,11 +343,17 @@ const Project = ({ project, i }) => {
 
       <div className="flex flex-col gap-6 p-9">
         <div className="flex flex-col gap-3">
-          <h3 className="font-medium text-2xl lg:text-[1.6rem] text-black">
+          <h3
+            className={`${
+              theme === "dark" ? "text-[#F9FAFB]!" : "text-black"
+            } font-medium text-2xl lg:text-[1.6rem]`}
+          >
             {project.Title}
           </h3>
 
-          <p className={`text-[1.2rem] lg:text-[1.3rem]`}>
+          <p
+            className={`text-[1.2rem] lg:text-[1.3rem] leading-[2rem] md:leading-[2.4rem]`}
+          >
             {project.Description}
           </p>
         </div>
@@ -349,11 +369,19 @@ const Project = ({ project, i }) => {
             className="underline hover:no-underline active:no-underline smooth-trans text-black text-[1.2rem] lg:text-[1.3rem] flex items-center gap-5"
           >
             <span>
-              <img
-                src="../../images/project-img/live-project-icon.png"
-                alt="link icon"
-                className="w-8"
-              />
+              {theme === "dark" ? (
+                <img
+                  src="../../images/project-img/link-chain.png"
+                  alt="link icon"
+                  className="w-8"
+                />
+              ) : (
+                <img
+                  src="../../images/project-img/live-project-icon.png"
+                  alt="link icon"
+                  className="w-8"
+                />
+              )}
             </span>
 
             <span>Live Preview</span>
@@ -365,11 +393,19 @@ const Project = ({ project, i }) => {
             className="underline hover:no-underline active:no-underline smooth-trans text-black text-[1.2rem] lg:text-[1.3rem] flex items-center gap-5"
           >
             <span>
-              <img
-                src="../../images/project-img/github-icon-project.png"
-                alt="github icon"
-                className="w-8"
-              />
+              {theme === "dark" ? (
+                <img
+                  src="../../images/tech-stack/github-fill.png"
+                  alt="github icon"
+                  className="w-8"
+                />
+              ) : (
+                <img
+                  src="../../images/project-img/github-icon-project.png"
+                  alt="github icon"
+                  className="w-8"
+                />
+              )}
             </span>
 
             <span>View Code</span>

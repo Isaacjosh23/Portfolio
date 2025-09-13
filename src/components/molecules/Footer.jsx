@@ -1,11 +1,14 @@
 import Container from "../reuseable/Container";
 import Section from "../reuseable/Section";
+import { ThemeContext } from "../Portfoilo";
+import { useContext } from "react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { theme } = useContext(ThemeContext);
 
   return (
-    <Section className="py-4">
+    <Section className={`py-4 ${theme === "dark" ? "bg-[#030712]" : ""}`}>
       <Container>
         <p className="mt-6 font-medium text-[1rem] lg:text-xl text-center">
           &copy; {currentYear} | Designed and coded by{" "}
@@ -16,7 +19,6 @@ const Footer = () => {
           >
             Ebhamen Joshua
           </a>{" "}
-          .
         </p>
       </Container>
     </Section>

@@ -1,9 +1,10 @@
-import { forwardRef, useEffect, useRef } from "react";
+import { forwardRef, useContext, useEffect, useRef } from "react";
 import Container from "../reuseable/Container";
 import Section from "../reuseable/Section";
 import Tag from "../reuseable/Tag";
 import { motion, useAnimationControls, useInView } from "framer-motion";
 import useResponsiveAmount from "../hooks/useResponsiveAmount";
+import { ThemeContext } from "../Portfoilo";
 
 const workExperiences = [
   {
@@ -62,6 +63,7 @@ const Experience = forwardRef((_, externalRef) => {
   const amount = useResponsiveAmount();
   const inView = useInView(internalRef, { amount });
   const controls = useAnimationControls();
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     if (inView) controls.start("visible");
@@ -75,12 +77,13 @@ const Experience = forwardRef((_, externalRef) => {
 
         if (externalRef) externalRef.current = el;
       }}
-      initial="init"
-      animate={controls}
-      variants={slideLeftVariant}
-      className="py-20 lg:py-32 bg-[var(--color-grey-50)]"
+      className={`py-20 lg:py-32 ${
+        theme === "dark" ? "bg-[#111827]" : "bg-[var(--color-grey-50)]"
+      }`}
     >
       <Container
+        initial="init"
+        animate={controls}
         variants={slideLeftVariant}
         className="flex flex-col items-center gap-12 md:gap-20 lg:gap-32"
       >
@@ -98,7 +101,7 @@ const Experience = forwardRef((_, externalRef) => {
 
           <motion.p
             variants={slideLeftVariant}
-            className="text-xl md:text-[1.35rem] text-center"
+            className="text-xl md:text-[1.35rem] text-center leading-[2rem] md:leading-[2.4rem]"
           >
             Here is a quick summary of my most recent experiences:
           </motion.p>
@@ -109,7 +112,12 @@ const Experience = forwardRef((_, externalRef) => {
           className="flex flex-col justify-center gap-16 md:grid md:grid-cols-3"
         >
           {workExperiences.map((work) => (
-            <ExperienceCard key={work.id} work={work} workTask={work.tasks} />
+            <ExperienceCard
+              key={work.id}
+              work={work}
+              workTask={work.tasks}
+              theme={theme}
+            />
           ))}
         </motion.ul>
       </Container>
@@ -117,11 +125,13 @@ const Experience = forwardRef((_, externalRef) => {
   );
 });
 
-const ExperienceCard = ({ work, workTask }) => {
+const ExperienceCard = ({ work, workTask, theme }) => {
   return (
     <motion.li
       variants={slideBottomVariant}
-      className="bg-white p-12 rounded-2xl custom-shadow flex flex-col justify-center gap-8 w-[28rem] md:col-span-full md:w-full md:items-center"
+      className={` ${
+        theme === "dark" ? "bg-[#1F2937]" : "bg-white custom-shadow"
+      } p-12 rounded-2xl  flex flex-col justify-center gap-8 w-[28rem] md:col-span-full md:w-full md:items-center`}
     >
       <div className="flex flex-col md:flex-row justify-center gap-2 md:gap-32">
         <a
@@ -136,12 +146,22 @@ const ExperienceCard = ({ work, workTask }) => {
           </p>
         </a>
 
-        <h3 className="text-2xl text-black font-semibold md:hidden">
+        <h3
+          className={`${
+            theme === "dark" ? "text-[#F9FAFB]!" : "text-black"
+          } text-2xl  font-semibold md:hidden`}
+        >
           {work.role}
         </h3>
 
         <div className="hidden md:flex md:flex-col gap-8">
-          <h3 className="text-2xl text-black font-semibold">{work.role}</h3>
+          <h3
+            className={`${
+              theme === "dark" ? "text-[#f9fafb]!" : "text-black"
+            } text-2xl font-semibold`}
+          >
+            {work.role}
+          </h3>
 
           <ul className="flex flex-col justify-center gap-3 list-disc">
             {workTask.map((task, i) => (
@@ -150,7 +170,13 @@ const ExperienceCard = ({ work, workTask }) => {
           </ul>
         </div>
 
-        <p className="text-[1.2rem]">{work.period}</p>
+        <p
+          className={`text-[1.2rem] ${
+            theme === "dark" ? "text-[#E5E7EB]" : ""
+          }`}
+        >
+          {work.period}
+        </p>
       </div>
 
       <ul className="flex flex-col justify-center gap-3 list-disc md:hidden">

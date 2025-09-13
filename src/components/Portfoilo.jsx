@@ -7,7 +7,9 @@ import Footer from "./molecules/Footer.jsx";
 import About from "./molecules/About.jsx";
 import GetInTouch from "./molecules/GetInTouch.jsx";
 import Experience from "./molecules/Experience.jsx";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { createContext } from "react";
+export const ThemeContext = createContext(null);
 
 const Portfoilo = () => {
   const aboutRef = useRef(null);
@@ -24,43 +26,51 @@ const Portfoilo = () => {
     }
   };
 
-  return (
-    <>
-      <Header
-        onHeroClick={() => scrollToSection(heroRef, 128)}
-        onAboutClick={() => scrollToSection(aboutRef, 100)}
-        onExperienceClick={() => scrollToSection(experienceRef, 100)}
-        onProjectClick={() => scrollToSection(projectRef, 100)}
-        onContactClick={() => scrollToSection(contactRef, 100)}
-      />
+  const [theme, setTheme] = useState("light");
 
-      <Main>
-        {/* Hero Section */}
-        <Hero
+  const toggleTheme = () => {
+    setTheme((curr) => (curr === "light" ? "dark" : "light"));
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <div className={theme}>
+        <Header
+          onHeroClick={() => scrollToSection(heroRef, 128)}
+          onAboutClick={() => scrollToSection(aboutRef, 100)}
+          onExperienceClick={() => scrollToSection(experienceRef, 100)}
           onProjectClick={() => scrollToSection(projectRef, 100)}
           onContactClick={() => scrollToSection(contactRef, 100)}
-          ref={heroRef}
         />
 
-        {/* About Section */}
-        <About ref={aboutRef} />
+        <Main>
+          {/* Hero Section */}
+          <Hero
+            onProjectClick={() => scrollToSection(projectRef, 100)}
+            onContactClick={() => scrollToSection(contactRef, 100)}
+            ref={heroRef}
+          />
 
-        {/* Tech Stack Section */}
-        <TechStack />
+          {/* About Section */}
+          <About ref={aboutRef} />
 
-        {/* Experience Section */}
-        <Experience ref={experienceRef} />
+          {/* Tech Stack Section */}
+          <TechStack />
 
-        {/* Project Section */}
-        <Projects ref={projectRef} />
+          {/* Experience Section */}
+          <Experience ref={experienceRef} />
 
-        {/* Get In Touch */}
-        <GetInTouch ref={contactRef} />
+          {/* Project Section */}
+          <Projects ref={projectRef} />
 
-        {/* Footer Section */}
-        <Footer />
-      </Main>
-    </>
+          {/* Get In Touch */}
+          <GetInTouch ref={contactRef} />
+
+          {/* Footer Section */}
+          <Footer />
+        </Main>
+      </div>
+    </ThemeContext.Provider>
   );
 };
 

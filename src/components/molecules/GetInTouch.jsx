@@ -1,9 +1,10 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useContext, useEffect, useRef, useState } from "react";
 import Container from "../reuseable/Container";
 import Section from "../reuseable/Section";
 import Tag from "../reuseable/Tag";
 import useResponsiveAmount from "../hooks/useResponsiveAmount";
 import { motion, useAnimationControls, useInView } from "framer-motion";
+import { ThemeContext } from "../Portfoilo";
 
 const slideRightVarient = {
   init: { opacity: 0, x: -100 },
@@ -22,6 +23,7 @@ const slideRightVarient = {
 
 const GetInTouch = forwardRef((_, externalRef) => {
   const [copied, setCopied] = useState(null);
+  const { theme } = useContext(ThemeContext);
 
   const handleCopy = (text, type) => {
     navigator.clipboard.writeText(text).then(() => {
@@ -48,12 +50,13 @@ const GetInTouch = forwardRef((_, externalRef) => {
 
         if (externalRef) externalRef.current = el;
       }}
-      initial="init"
-      animate={controls}
-      variants={slideRightVarient}
-      className="py-20 lg:py-32 bg-[var(--color-grey-50)]"
+      className={`py-20 lg:py-32 ${
+        theme === "dark" ? "bg-[#111827]" : "bg-[var(--color-grey-50)]"
+      }`}
     >
       <Container
+        initial="init"
+        animate={controls}
         variants={slideRightVarient}
         className="flex flex-col items-center gap-6 md:gap-12"
       >
@@ -67,7 +70,7 @@ const GetInTouch = forwardRef((_, externalRef) => {
 
           <motion.p
             variants={slideRightVarient}
-            className="text-xl md:text-[1.35rem] text-center"
+            className="text-xl md:text-[1.35rem] text-center leading-[2rem] md:leading-[2.4rem]"
           >
             What’s next? Feel free to reach out to me if you're looking for a
             developer, have a query, or simply want to connect.

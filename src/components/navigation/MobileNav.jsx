@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ThemeContext } from "../Portfoilo";
 
 const MobileNav = ({
   onAboutClick,
@@ -8,6 +9,7 @@ const MobileNav = ({
   onHeroClick,
 }) => {
   const [navIsOpen, setNavIsOpen] = useState(false);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const handleNavToggle = () => {
     setNavIsOpen((open) => !open);
@@ -23,6 +25,11 @@ const MobileNav = ({
     setNavIsOpen(false);
   };
 
+  const handleMode = () => {
+    toggleTheme();
+    setNavIsOpen(false);
+  };
+
   const [downloading, setDownloading] = useState(false);
 
   const handleClick = () => {
@@ -33,11 +40,19 @@ const MobileNav = ({
     <>
       {navIsOpen && (
         <nav className="main-nav md:hidden absolute w-full h-screen invisible opacity-0 pointer-events-none z-[45] smooth-trans nav-position">
-          <ul className="flex flex-col bg-white items-center gap-10 h-screen">
+          <ul
+            className={`flex flex-col items-center gap-10 h-screen ${
+              theme === "dark" ? "bg-[#030712]" : "bg-white"
+            }`}
+          >
             <li>
               <a
                 href="#"
-                className="text-[1.5rem] font-bold nav-links"
+                className={`text-[1.5rem] font-bold nav-links ${
+                  theme === "dark"
+                    ? "text-gray-300!"
+                    : "text-[var(--color-grey)]"
+                }`}
                 onClick={(e) => handleNavClick(e, onHeroClick)}
               >
                 Home
@@ -48,7 +63,11 @@ const MobileNav = ({
               <a
                 href="#"
                 onClick={(e) => handleNavClick(e, onAboutClick)}
-                className="text-[1.5rem] font-bold nav-links"
+                className={`text-[1.5rem] font-bold nav-links ${
+                  theme === "dark"
+                    ? "text-gray-300!"
+                    : "text-[var(--color-grey)]"
+                }`}
               >
                 About
               </a>
@@ -57,7 +76,11 @@ const MobileNav = ({
             <li>
               <a
                 href="#"
-                className="text-[1.5rem] font-bold nav-links"
+                className={`text-[1.5rem] font-bold nav-links ${
+                  theme === "dark"
+                    ? "text-gray-300!"
+                    : "text-[var(--color-grey)]"
+                }`}
                 onClick={(e) => handleNavClick(e, onExperienceClick)}
               >
                 Experience
@@ -67,7 +90,11 @@ const MobileNav = ({
             <li>
               <a
                 href="#"
-                className="text-[1.5rem] font-bold nav-links"
+                className={`text-[1.5rem] font-bold nav-links ${
+                  theme === "dark"
+                    ? "text-gray-300!"
+                    : "text-[var(--color-grey)]"
+                }`}
                 onClick={(e) => handleNavClick(e, onProjectClick)}
               >
                 Projects
@@ -77,7 +104,11 @@ const MobileNav = ({
             <li>
               <a
                 href="#"
-                className="text-[1.5rem] font-bold nav-links"
+                className={`text-[1.5rem] font-bold nav-links ${
+                  theme === "dark"
+                    ? "text-gray-300!"
+                    : "text-[var(--color-grey)]"
+                }`}
                 onClick={(e) => handleNavClick(e, onContactClick)}
               >
                 Contact
@@ -89,13 +120,21 @@ const MobileNav = ({
                 onClick={handleClick}
                 href="../../../resume/resume.docx"
                 download="Ebahmen_Joshua_Resume.docx"
-                className={`p-4 bg-black text-white text-[1.3rem] font-semibold md:text-[1.4rem] lg:text-[1.6rem] hover:bg-[#333] smooth-trans hover-shadow custom-shadow rounded-3xl flex items-center justify-center gap-2 min-w-[128px]  ${
+                className={`p-4 text-[1.3rem] font-semibold md:text-[1.4rem] lg:text-[1.6rem] smooth-trans hover-shadow custom-shadow rounded-3xl flex items-center justify-center gap-2 min-w-[128px]  ${
                   downloading ? "opacity-70 pointer-events-none" : ""
+                } ${
+                  theme === "dark"
+                    ? "bg-[#F9FAFB] text-[#111827]!"
+                    : "bg-black text-white hover:bg-[#333]"
                 }`}
               >
                 {downloading ? (
                   <>
-                    <span className="loader border-2 p-3 border-white border-t-transparent rounded-full w-5 h-5 animate-spin"></span>
+                    <span
+                      className={`loader border-2 p-3 border-t-transparent rounded-full w-5 h-5 animate-spin ${
+                        theme === "dark" ? "border-black" : "border-white"
+                      }`}
+                    ></span>
                     {/* Downloading... */}
                   </>
                 ) : (
@@ -103,16 +142,21 @@ const MobileNav = ({
                 )}
               </a>
 
-              <button className="flex items-center gap-4 p-2 rounded-[8px] custom-shadow">
-                <ion-icon
-                  name="sunny-outline"
-                  className="w-[2.5rem] h-[2.5rem] hidden"
-                ></ion-icon>
-
-                <ion-icon
-                  name="moon-outline"
-                  className="w-[2.5rem] h-[2.5rem]"
-                ></ion-icon>
+              <button
+                className="flex items-center gap-4 p-2 rounded-[8px] custom-shadow"
+                onClick={handleMode}
+              >
+                {theme === "light" ? (
+                  <ion-icon
+                    name="moon-outline"
+                    className="w-[2.5rem] h-[2.5rem]"
+                  ></ion-icon>
+                ) : (
+                  <ion-icon
+                    name="sunny-outline"
+                    className="w-[2.5rem] h-[2.5rem]"
+                  ></ion-icon>
+                )}
               </button>
             </div>
           </ul>

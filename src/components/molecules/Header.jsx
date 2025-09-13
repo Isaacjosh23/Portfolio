@@ -1,5 +1,7 @@
 import MobileNav from "../navigation/MobileNav.jsx";
 import DesktopNav from "../navigation/DesktopNav.jsx";
+import { ThemeContext } from "../Portfoilo.jsx";
+import { useContext } from "react";
 
 const Header = ({
   onAboutClick,
@@ -8,8 +10,13 @@ const Header = ({
   onContactClick,
   onHeroClick,
 }) => {
+  const { theme } = useContext(ThemeContext);
   return (
-    <header className="fixed bg-white w-full z-[999] nav-open">
+    <header
+      className={`fixed  w-full z-[999] nav-open ${
+        theme === "dark" ? "bg-[#030712]" : "bg-white"
+      }`}
+    >
       <div className="flex items-center justify-between container h-32">
         <div className="flex items-center">
           <a href="#" onClick={() => window.location.reload()}>
