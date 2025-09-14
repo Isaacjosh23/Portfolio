@@ -23,7 +23,7 @@ const Header = ({
             <img
               src="../images/name-logo.png"
               alt="Joshua"
-              className="w-24 lg:w-28"
+              className="w-[4.8rem] md:w-[5rem] lg:w-24"
             />
           </a>
         </div>
