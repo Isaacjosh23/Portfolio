@@ -7,7 +7,7 @@ import Footer from "./molecules/Footer.jsx";
 import About from "./molecules/About.jsx";
 import GetInTouch from "./molecules/GetInTouch.jsx";
 import Experience from "./molecules/Experience.jsx";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createContext } from "react";
 export const ThemeContext = createContext(null);
 
@@ -26,7 +26,13 @@ const Portfoilo = () => {
     }
   };
 
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("theme") || "light";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const toggleTheme = () => {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
