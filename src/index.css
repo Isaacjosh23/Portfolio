@@ -54,11 +54,19 @@ body {
   text-decoration: underline;
 }
 
-.nav-open .main-nav {
+.main-nav {
+  transition: transform 0.4s ease, opacity 0.3s ease;
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.main-nav.open {
+  transform: translateX(0);
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
-  transform: translateX(0);
 }
 
 .nav-open .icon-mobile-nav[name="close-outline"] {
@@ -72,12 +80,11 @@ body {
 
 .nav-position {
   top: 0;
-  transform: translate(-50%, 50%);
   left: 40%;
 }
 
 .nav-position ul {
-  padding: 22% 45% 22% 10%;
+  padding: 40% 50% 22% 25%;
 }
 
 .smooth-trans {
@@ -94,7 +101,7 @@ body {
 }
 
 .hover-shadow {
-  transition: transform 0.3s ease; /* smooth animation */
+  transition: transform 0.3s ease;
 }
 
 .hover-shadow:hover {
@@ -114,7 +121,7 @@ body {
   background: linear-gradient(to right, #13b0f5, #ca24b4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text; /* for Firefox */
+  background-clip: text;
   color: transparent;
 }
 
